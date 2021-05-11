@@ -1,10 +1,20 @@
+import pydrive
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
+import oauth as oa
 
 
 def main():
     gauth = GoogleAuth()
-    gauth.LocalWebserverAuth() # Creates local webserver and auto handles authentication.
+    while True:
+        try:
+            # Creates local webserver and attempts authentication.
+            gauth.LocalWebserverAuth()
+        except pydrive.settings.InvalidConfigError:
+            # File ‘client_secrets.json’ is not present.
+            id, secret = oa.get_id_secret()
+            if id and secret:
+                oa.create_settings_file(id, secret)
 
     drive = GoogleDrive(gauth)
 

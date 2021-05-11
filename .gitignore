@@ -2,3 +2,5 @@
 \#*\#
 .\#*
 venv
+settings.yaml
+credentials.json

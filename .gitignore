@@ -4,3 +4,4 @@
 venv
 settings.yaml
 credentials.json
+__pycache__

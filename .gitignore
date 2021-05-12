@@ -2,6 +2,5 @@
 \#*\#
 .\#*
 venv
-settings.yaml
-credentials.json
+client_secret.json
 __pycache__

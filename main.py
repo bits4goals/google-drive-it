@@ -156,7 +156,6 @@ def upload():
     data=json.dumps(params))
 
   status_code = getattr(request, 'status_code')
-  return f'status_code: {status_code}<br>location: {location}'
   upload_url = request.headers['Location']
 
   with open(file_path, 'rb') as f:
@@ -185,6 +184,9 @@ def upload():
       print(request)
 
       current_byte = int(request.headers['Range'].split('-')[-1]) + 1
+
+  return f'status_code: {status_code}<br>upload_url: {upload_url}'
+
 
 @app.route('/clear')
 def clear_credentials():

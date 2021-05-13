@@ -166,7 +166,6 @@ def upload():
         str(file_size)
       headers = {'Content-Range': content_range}
 
-      # TODO: handle errors type 500
       request = requests.put(upload_url,
                              headers=headers,
                              data=chunk)

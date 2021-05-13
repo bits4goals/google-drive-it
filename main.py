@@ -158,6 +158,12 @@ def print_index_table():
           '</td></tr></table>')
 
 
+def create_hello_world(folder):
+  with open(os.path.join(folder, 'hello-world.txt'), w) as f:
+    f.write('Hello World!')
+  return f
+
+
 if __name__ == '__main__':
   # ‘home’ is a regular (empty) file used to tell the program to run locally.
   if os.path.exists('home'):

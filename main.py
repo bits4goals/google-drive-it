@@ -9,6 +9,9 @@ import google_auth_oauthlib.flow
 import googleapiclient.discovery
 
 import tempfile
+import magic
+
+
 # This variable specifies the name of a file that contains the OAuth 2.0
 # information for this application, including its client_id and client_secret.
 CLIENT_SECRETS_FILE = "client_secret.json"
@@ -24,6 +27,9 @@ app = flask.Flask(__name__)
 # If you use this code in your application, replace this with a truly secret
 # key. See https://flask.palletsprojects.com/quickstart/#sessions.
 app.secret_key = 'REPLACE ME - this value is here as a placeholder.'
+
+
+get_mime_type = magic.Magic(mime=True).from_file
 
 
 @app.route('/')

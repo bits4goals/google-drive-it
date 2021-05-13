@@ -159,6 +159,32 @@ def upload():
   return f'status_code: {status_code}<br>location: {location}'
   upload_url = request.headers['Location']
 
+  with open(file_path, 'rb') as f:
+    file_size = str(os.path.getsize(file_path))
+    current_byte = 0
+    for chunk in get_chunks(f):
+      content_range = 'bytes ' + \
+        str(current_byte) + \
+        '-' + \
+        str(current_byte + len(chunk) - 1) + \
+        '/' + \
+        str(file_size)
+      headers = {'Content-Range': content_range}
+
+      # TODO: handle errors type 500
+      request = requests.put(upload_url,
+                             headers=headers,
+                             data=chunk)
+
+      response = getattr(request, 'status_code')
+      if response in (200, 201):
+        break
+
+      print(content_range)
+      print(upload_url)
+      print(request)
+
+      current_byte = int(request.headers['Range'].split('-')[-1]) + 1
 
 @app.route('/clear')
 def clear_credentials():

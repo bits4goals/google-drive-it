@@ -148,6 +148,8 @@ def upload():
 
   file_path = 'avatar.jpg'
 
+  params = {'name': os.path.basename(file_path)}
+
   request = requests.post(
     'https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable',
     headers=headers)

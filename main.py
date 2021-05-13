@@ -154,10 +154,10 @@ def upload():
     'https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable',
     headers=headers)
 
-  location = request.headers['Location']
 
   status_code = getattr(request, 'status_code')
   return f'status_code: {status_code}<br>location: {location}'
+  upload_url = request.headers['Location']
 
 
 @app.route('/clear')

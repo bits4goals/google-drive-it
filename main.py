@@ -141,16 +141,16 @@ Source: https://stackoverflow.com/a/519653/3684790"""
 @app.route('/requestupload')
 def requestupload():
   if 'credentials' not in flask.session:
-    return ('You need to <a href="/authorize">authorize</a> first.')
+    return ('You need to <a href='/authorize'>authorize</a> first.')
 
   credentials = google.oauth2.credentials.Credentials(
     **flask.session['credentials'])
 
-  headers = {"Authorization": "Bearer " + credentials.token,
-             "Content-Type": "application/json"}
+  headers = {'Authorization': 'Bearer ' + credentials.token,
+             'Content-Type': 'application/json'}
 
   request = requests.post(
-    "https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable",
+    'https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable',
     headers=headers)
 
   location = request.headers['Location']

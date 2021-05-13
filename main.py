@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import tempfile
 import flask
 import requests
 
@@ -27,6 +28,9 @@ app.secret_key = 'REPLACE ME - this value is here as a placeholder.'
 
 @app.route('/')
 def index():
+  with tempfile.TemporaryDirectory() as temp_dir:
+    hello_world_file = create_hello_world(temp_dir)
+
   return print_index_table()
 
 

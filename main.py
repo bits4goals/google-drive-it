@@ -148,7 +148,7 @@ def requestupload():
   location = request.headers['Location']
 
   status_code = getattr(request, 'status_code')
-  return 'status_code: {}'.format(status_code)
+  return f'status_code: {status_code}<br>location: {location}'
 
 
 @app.route('/clear')

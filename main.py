@@ -146,6 +146,8 @@ def upload():
   headers = {'Authorization': 'Bearer ' + credentials.token,
              'Content-Type': 'application/json'}
 
+  file_path = 'avatar.jpg'
+
   request = requests.post(
     'https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable',
     headers=headers)

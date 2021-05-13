@@ -127,6 +127,17 @@ def revoke():
     return('An error occurred.' + print_index_table())
 
 
+def get_chunks(file_object, chunk_size=512*1024):
+  """Act as a generator, yielding file in chunks.
+Chunk has a default size of 256k.
+Source: https://stackoverflow.com/a/519653/3684790"""
+  while True:
+    data = file_object.read(chunk_size)
+    if not data:
+      break
+    yield data
+
+
 @app.route('/requestupload')
 def requestupload():
   if 'credentials' not in flask.session:

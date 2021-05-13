@@ -135,16 +135,14 @@ def requestupload():
   credentials = google.oauth2.credentials.Credentials(
     **flask.session['credentials'])
 
-  params = {
-    "name": "sample.png",
-    "mimeType": "image/png"
-  }
+  headers = {"Authorization": "Bearer " + credentials.token,
+             "Content-Type": "application/json"}
+
   request = requests.post(
     "https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable",
-    headers={"Authorization": "Bearer " + credentials.token,
-             "Content-Type": "application/json"},
-    data=json.dumps(params)
+    headers=headers,
   )
+
   location = request.headers['Location']
 
   status_code = getattr(request, 'status_code')

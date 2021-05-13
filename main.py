@@ -9,6 +9,7 @@ import google_auth_oauthlib.flow
 import googleapiclient.discovery
 
 import tempfile
+import json
 
 
 # This variable specifies the name of a file that contains the OAuth 2.0
@@ -124,6 +125,30 @@ def revoke():
     return('Credentials successfully revoked.' + print_index_table())
   else:
     return('An error occurred.' + print_index_table())
+
+
+@app.route('/requestupload')
+def requestupload():
+  if 'credentials' not in flask.session:
+    return ('You need to <a href="/authorize">authorize</a> first.')
+
+  credentials = google.oauth2.credentials.Credentials(
+    **flask.session['credentials'])
+
+  params = {
+    "name": "sample.png",
+    "mimeType": "image/png"
+  }
+  request = requests.post(
+    "https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable",
+    headers={"Authorization": "Bearer " + credentials.token,
+             "Content-Type": "application/json"},
+    data=json.dumps(params)
+  )
+  location = request.headers['Location']
+
+  status_code = getattr(request, 'status_code')
+  return 'status_code: {}'.format(status_code)
 
 
 @app.route('/clear')

@@ -8,7 +8,6 @@ import google.oauth2.credentials
 import google_auth_oauthlib.flow
 import googleapiclient.discovery
 
-import tempfile
 import json
 
 
@@ -31,9 +30,6 @@ app.secret_key = 'REPLACE ME - this value is here as a placeholder.'
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-  with tempfile.TemporaryDirectory() as temp_dir:
-    hello_world_file = create_hello_world(temp_dir)
-
   return flask.render_template('index.html')
 
 
@@ -224,12 +220,6 @@ def print_index_table():
           '    After clearing the token, if you <a href="/test">test the ' +
           '    API request</a> again, you should go back to the auth flow.' +
           '</td></tr></table>')
-
-
-def create_hello_world(folder):
-  with open(os.path.join(folder, 'hello-world.txt'), 'w') as f:
-    f.write('Hello World!')
-  return f
 
 
 if __name__ == '__main__':

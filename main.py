@@ -37,7 +37,7 @@ def index():
   with tempfile.TemporaryDirectory() as temp_dir:
     hello_world_file = create_hello_world(temp_dir)
 
-  return print_index_table()
+  return flask.render_template('index.html')
 
 
 @app.route('/test')

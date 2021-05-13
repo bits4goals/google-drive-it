@@ -32,7 +32,7 @@ app.secret_key = 'REPLACE ME - this value is here as a placeholder.'
 get_mime_type = magic.Magic(mime=True).from_file
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
   with tempfile.TemporaryDirectory() as temp_dir:
     hello_world_file = create_hello_world(temp_dir)

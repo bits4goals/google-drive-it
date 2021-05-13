@@ -138,8 +138,8 @@ Source: https://stackoverflow.com/a/519653/3684790"""
     yield data
 
 
-@app.route('/requestupload')
-def requestupload():
+@app.route('/upload')
+def upload():
   if 'credentials' not in flask.session:
     return ('You need to <a href='/authorize'>authorize</a> first.')
 

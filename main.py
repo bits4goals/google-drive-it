@@ -169,7 +169,7 @@ def print_index_table():
 
 
 def create_hello_world(folder):
-  with open(os.path.join(folder, 'hello-world.txt'), w) as f:
+  with open(os.path.join(folder, 'hello-world.txt'), 'w') as f:
     f.write('Hello World!')
   return f
 

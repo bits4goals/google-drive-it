@@ -135,7 +135,7 @@ Source: https://stackoverflow.com/a/519653/3684790"""
 
 
 @app.route('/upload/<path:file_url>')
-def upload(file_url):
+def upload(url):
   credentials = google.oauth2.credentials.Credentials(
     **flask.session['credentials'])
 
@@ -145,8 +145,8 @@ def upload(file_url):
   file_path = 'avatar.jpg'
   # This is necessary because ‘@app.route()’ removes consecutive ‘/’
   # (which may be present in the received URL).
-  file_url = file_url.replace('http:/', 'http://')
-  file_url = file_url.replace('https:/', 'https://')
+  url = url.replace('http:/', 'http://')
+  url = url.replace('https:/', 'https://')
 
   params = {'name': os.path.basename(file_path)}
 

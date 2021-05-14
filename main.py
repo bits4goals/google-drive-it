@@ -143,6 +143,10 @@ def upload(file_url):
              'Content-Type': 'application/json'}
 
   file_path = 'avatar.jpg'
+  # This is necessary because ‘@app.route()’ removes consecutive ‘/’
+  # (which may be present in the received URL).
+  file_url = file_url.replace('http:/', 'http://')
+  file_url = file_url.replace('https:/', 'https://')
 
   params = {'name': os.path.basename(file_path)}
 

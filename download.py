@@ -82,7 +82,7 @@ class Url:
             with urllib.request.urlopen(url) as response:
                 with tempfile.NamedTemporaryFile(delete=False) as f:
                     shutil.copyfileobj(response, f)
-                local_filepath = f.name
+                temp_filename = f.name
         except ValueError:
             # Raised by urllib.request.urlopen or urllib.parse.urlparse.
             print(error_msg.format('Malformed or invalid URL'))

@@ -14,6 +14,7 @@ class Url:
     """URL stuff."""
 
     _urlpath = None
+    _basename = None
 
 
     def __init__(self, url):
@@ -46,24 +47,17 @@ class Url:
     def basename(self):
         """URL’s filename on the remote server.
 
-        This is the “original” filename on the server from where it
-        is being downloaded.
-        It is obtained from the URL’s path, which may be different
-        from the URL itself, in which case it must be parsed first.
-        If this is the case, updates the URL path after parsing
-        it."""
+        “Original” filename on the server from where it is being
+        accessed."""
 
-        if self.urlpath is None:
+        if self._basename is None:
             try:
-                self.urlpath = urllib.parse.urlparse(self.url).path
-            except RuntimeError from ValueError:
-                log.error('Malformed URL')
-                raise
-            except:
-                log.error('Problems parsing URL')
+                self._basename = os.path.basename(self.urlpath)
+            except RuntimeError from Exception:
+                log.error('Problems determining the basename')
                 raise
 
-        return os.path.basename(self.urlpath)
+        return self._basename
 
 
     def download(self, url=self.url, filename=None, tempfile=False):

@@ -88,11 +88,9 @@ class Url:
                 # still have access to the data.
                 self.__responseurl = response.url
         except ValueError:
-            # Raised by urllib.request.urlopen or urllib.parse.urlparse.
             print(error_msg.format('Malformed or invalid URL'))
             # raise
         except urllib.error.URLError as e:
-            # Raised by urllib.request.urlopen.
             print(error_msg.format(e.reason.strerror))
             # raise
         except:

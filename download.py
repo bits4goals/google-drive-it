@@ -13,6 +13,7 @@ error_msg = 'Error: {}'
 class Url:
     """URL stuff."""
 
+    _responseurl = None
     _urlpath = None
     _basename = None
 
@@ -21,6 +22,16 @@ class Url:
         """Use URL for the new instantiated object."""
 
         self.url = url
+
+
+    @property
+    def responseurl(self):
+        """Return of ‘urllib.request.urlopen(URL)’."""
+
+        if not self._responseurl:
+            err_msg = 'Response URL must be set first'
+            log.error(err_msg)
+            raise RuntimeError(err_msg)
 
 
     @property

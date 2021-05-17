@@ -1,11 +1,17 @@
-import shutil
 import urllib.request
 import urllib.parse
 import urllib.error
 import os
+import tempfile
+import shutil
 
 
 error_msg = 'Error: {}'
+
+
+class Url:
+    """URL resources."""
+    pass
 
 
 def download_temp(url):
@@ -40,3 +46,8 @@ URLError
         raise Exception('Error: download_temp: Download process failed')
     else:
         return local_filepath, remote_filename
+
+
+download_temp('https://www.bits4wuts.com/foo.txt')
+download_temp('')
+download_temp('https://github.com/bits4waves/100daysofpractice-dataset/raw/master/requirements.txt')

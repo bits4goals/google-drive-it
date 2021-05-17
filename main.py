@@ -148,6 +148,17 @@ def upload(url):
   url = url.replace('http:/', 'http://')
   url = url.replace('https:/', 'https://')
 
+  # Download it as a temporary file using the received url.
+  filepath, filename = download_temp(url)
+  with tempfile.TemporaryDirectory() as temp_dir:
+    try:
+      r = requests.get(url)
+    except requests.exceptions.RequestException as e:
+      raise SystemExit(e)
+
+    f.write(r.content)
+    wav_filename = f.name
+
   params = {'name': os.path.basename(file_path)}
 
   request = requests.post(

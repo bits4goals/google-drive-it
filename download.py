@@ -60,12 +60,10 @@ class Url:
         return self._basename
 
 
-    def download(self, url=self.url, filename=None, tempfile=False):
-        """Fetch and persist a file from a URL.
+    def download(self):
+        """Fetch file from URL and persist it locally as a temporary file.
 
-        Return the path where the file was saved to.
-        If FILENAME was provided, use it; if not, use the name obtained from the remote server.
-        When TEMPFILE is True, create a temporary"""
+        Returns the temporary filename."""
 
         try:
             with urllib.request.urlopen(url) as response:

@@ -19,8 +19,9 @@ class Url:
         self.url = url
 
 
-    def get_basename(self):
-        """Fetch URL’s filename on the remote server.
+    @property
+    def basename(self):
+        """URL’s filename on the remote server.
 
         This is the “original” filename on the server from where it
         is being downloaded.

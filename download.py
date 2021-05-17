@@ -83,6 +83,10 @@ class Url:
                 with tempfile.NamedTemporaryFile(delete=False) as f:
                     shutil.copyfileobj(response, f)
                 temp_filename = f.name
+
+                # Set property in the appropriate context, while we
+                # still have access to the data.
+                self.__responseurl = response.url
         except ValueError:
             # Raised by urllib.request.urlopen or urllib.parse.urlparse.
             print(error_msg.format('Malformed or invalid URL'))

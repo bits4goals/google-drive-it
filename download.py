@@ -80,9 +80,8 @@ class Url:
 
         try:
             with urllib.request.urlopen(url) as response:
-                with tempfile.NamedTemporaryFile(delete=False) as f:
-                    shutil.copyfileobj(response, f)
-                temp_filename = f.name
+                with tempfile.NamedTemporaryFile(delete=False) as temp_f:
+                    shutil.copyfileobj(response, temp_f)
 
                 # Set property in the appropriate context, while we
                 # still have access to the data.
@@ -98,7 +97,7 @@ class Url:
             log.error(msg)
             raise RuntimeError(msg) from e
         else:
-            return local_filepath, temp_filename
+            return temp_f.name, local_filepath
 
 
 download_temp('https://www.bits4wuts.com/foo.txt')

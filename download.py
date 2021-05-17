@@ -64,9 +64,10 @@ class Url:
         if self.__basename is None:
             try:
                 self.__basename = os.path.basename(self._urlpath)
-            except RuntimeError from Exception:
-                log.error('Problems determining the basename')
-                raise
+            except e:
+                msg = 'Problems determining the basename'
+                log.error(msg)
+                raise RuntimeError(msg) from e
 
         return self.__basename
 

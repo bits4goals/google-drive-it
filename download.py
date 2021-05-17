@@ -4,6 +4,7 @@ import urllib.error
 import os
 import tempfile
 import shutil
+import logging as log
 
 
 error_msg = 'Error: {}'
@@ -18,6 +19,29 @@ class Url:
         self.url = url
 
 
+    def get_basename(self):
+        """Fetch URL’s filename on the remote server.
+
+        This is the “original” filename on the server from where it
+        is being downloaded.
+        It is obtained from the URL’s path, which may be different
+        from the URL itself, in which case it must be parsed first.
+        If this is the case, updates the URL path after parsing
+        it."""
+
+        if self.urlpath is None:
+            try:
+                self.urlpath = urllib.parse.urlparse(self.url).path
+            except RuntimeError from ValueError:
+                log.error('Malformed URL')
+                raise
+            except:
+                log.error('Problems parsing URL')
+                raise
+
+        return os.path.basename(self.urlpath)
+
+
     def download(self, filename=None, tempfile=False):
         """Fetch and persist the file from the object’s URL.
 
@@ -28,12 +52,6 @@ class Url:
 
         try:
             with urllib.request.urlopen(url) as response:
-                try:
-                    parsed_url_path = urllib.parse.urlparse(response.url).path
-                except:
-                    print(error_msg.format('Problems parsing the URL'))
-                    raise
-                remote_filename = os.path.basename(parsed_url_path)
                 with tempfile.NamedTemporaryFile(delete=False) as f:
                     shutil.copyfileobj(response, f)
                 local_filepath = f.name

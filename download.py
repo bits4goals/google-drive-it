@@ -46,8 +46,7 @@ class Url:
         """Fetch and persist a file from a URL.
 
         Return the path where the file was saved to.
-        If FILENAME was provided, use it to save the file, or else
-        use the name obtained from the remote server.
+        If FILENAME was provided, use it; if not, use the name obtained from the remote server.
         When TEMPFILE is True, create a temporary"""
 
         try:

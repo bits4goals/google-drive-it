@@ -89,14 +89,16 @@ class Url:
                 self.__responseurl = response.url
         except ValueError:
             print(error_msg.format('Malformed or invalid URL'))
-            # raise
+            raise
         except urllib.error.URLError as e:
             print(error_msg.format(e.reason.strerror))
-            # raise
-        except:
-            raise Exception('Error: download_temp: Download process failed')
+            raise
+        except e:
+            msg = 'Problems downloaing the file'
+            log.error(msg)
+            raise RuntimeError(msg) from e
         else:
-            return local_filepath, remote_filename
+            return local_filepath, temp_filename
 
 
 download_temp('https://www.bits4wuts.com/foo.txt')

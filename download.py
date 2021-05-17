@@ -11,7 +11,11 @@ error_msg = 'Error: {}'
 
 class Url:
     """URL resources."""
-    pass
+
+    def __init__(self, url):
+        """Use URL for the new instantiated object."""
+
+        self.url = url
 
 
 def download_temp(url):

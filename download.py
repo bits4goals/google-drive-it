@@ -42,8 +42,8 @@ class Url:
         return os.path.basename(self.urlpath)
 
 
-    def download(self, filename=None, tempfile=False):
-        """Fetch and persist the file from the object’s URL.
+    def download(self, url=self.url, filename=None, tempfile=False):
+        """Fetch and persist a file from a URL.
 
         Return the path where the file was saved to.
         If FILENAME was provided, use it to save the file, or else

@@ -43,11 +43,12 @@ class Url:
 
         if not self.__urlpath:
             try:
-            except RuntimeError from ValueError:
-                log.error('Malformed URL')
-                raise
                 self.__urlpath =
                     urllib.parse.urlparse(self._responseurl).path
+            except ValueError as e:
+                msg = 'Malformed URL'
+                log.error(msg)
+                raise RuntimeError(msg) from e
             except:
                 log.error('Problems parsing URL')
                 raise

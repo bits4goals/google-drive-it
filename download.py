@@ -74,7 +74,8 @@ class Url:
     def download(self):
         """Fetch file from URL and persist it locally as a temporary file.
 
-        Returns the temporary filename."""
+        Returns the temporary filename and the original filename on the
+        server."""
 
         try:
             with urllib.request.urlopen(url) as response:

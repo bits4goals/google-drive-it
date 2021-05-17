@@ -13,9 +13,9 @@ error_msg = 'Error: {}'
 class Url:
     """URL stuff."""
 
-    _responseurl = None
-    _urlpath = None
-    _basename = None
+    __responseurl = None
+    __urlpath = None
+    __basename = None
 
 
     def __init__(self, url):
@@ -25,25 +25,25 @@ class Url:
 
 
     @property
-    def responseurl(self):
+    def _responseurl(self):
         """Return of ‘urllib.request.urlopen(URL)’."""
 
-        if not self._responseurl:
+        if not self.__responseurl:
             err_msg = 'Response URL must be set first'
             log.error(err_msg)
             raise RuntimeError(err_msg)
 
 
     @property
-    def urlpath(self):
+    def _urlpath(self):
         """Result of parsing the object’s URL.
 
         It is obtained from the URL’s path, which may be different
         from the URL itself in some cases."""
 
-        if not self._urlpath:
+        if not self.__urlpath:
             try:
-                self._urlpath = urllib.parse.urlparse(self.url).path
+                self.__urlpath = urllib.parse.urlparse(self._responseurl).path
             except RuntimeError from ValueError:
                 log.error('Malformed URL')
                 raise
@@ -51,24 +51,24 @@ class Url:
                 log.error('Problems parsing URL')
                 raise
 
-        return self._urlpath
+        return self.__urlpath
 
 
     @property
-    def basename(self):
+    def _basename(self):
         """URL’s filename on the remote server.
 
         “Original” filename on the server from where it is being
         accessed."""
 
-        if self._basename is None:
+        if self.__basename is None:
             try:
-                self._basename = os.path.basename(self.urlpath)
+                self.__basename = os.path.basename(self._urlpath)
             except RuntimeError from Exception:
                 log.error('Problems determining the basename')
                 raise
 
-        return self._basename
+        return self.__basename
 
 
     def download(self):

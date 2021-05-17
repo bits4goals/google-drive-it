@@ -13,10 +13,33 @@ error_msg = 'Error: {}'
 class Url:
     """URL stuff."""
 
+    _urlpath = None
+
+
     def __init__(self, url):
         """Use URL for the new instantiated object."""
 
         self.url = url
+
+
+    @property
+    def urlpath(self):
+        """Result of parsing the object’s URL.
+
+        It is obtained from the URL’s path, which may be different
+        from the URL itself in some cases."""
+
+        if not self._urlpath:
+            try:
+                self._urlpath = urllib.parse.urlparse(self.url).path
+            except RuntimeError from ValueError:
+                log.error('Malformed URL')
+                raise
+            except:
+                log.error('Problems parsing URL')
+                raise
+
+        return self._urlpath
 
 
     @property

@@ -1,5 +1,5 @@
 import unittest
-import url
+import url as urlm
 import itertools
 import random
 import string

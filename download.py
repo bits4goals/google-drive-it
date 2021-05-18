@@ -14,9 +14,9 @@ error_msg = 'Error: {}'
 class Url:
     """URL stuff."""
 
-    __responseurl = None
-    __urlpath = None
-    __basename = None
+    _responseurl = None
+    _urlpath = None
+    _basename_f = None
 
 
     def __init__(self, url):
@@ -26,26 +26,33 @@ class Url:
 
 
     @property
-    def _responseurl(self):
+    def responseurl(self):
         """Return of ‘urllib.request.urlopen(URL)’."""
 
-        if not self.__responseurl:
+        if not self._responseurl:
             err_msg = 'Response URL must be set first'
             log.error(err_msg)
             raise RuntimeError(err_msg)
 
+        return self._responseurl
+
+
+    @responseurl.setter
+    def responseurl(self, value):
+        self._responseurl = value
+
 
     @property
-    def _urlpath(self):
+    def urlpath(self):
         """Result of parsing the object’s URL.
 
         It is obtained from the URL’s path, which may be different
         from the URL itself in some cases."""
 
-        if not self.__urlpath:
+        if not self._urlpath:
             try:
-                self.__urlpath = \
-                    urllib.parse.urlparse(self._responseurl).path
+                self._urlpath = \
+                    urllib.parse.urlparse(self.responseurl).path
             except ValueError as e:
                 msg = 'Malformed URL'
                 log.error(msg)
@@ -55,25 +62,25 @@ class Url:
                 log.error(msg)
                 raise
 
-        return self.__urlpath
+        return self._urlpath
 
 
     @property
-    def _basename(self):
+    def basename_f(self):
         """URL’s filename on the remote server.
 
         “Original” filename on the server from where it is being
         accessed."""
 
-        if self.__basename is None:
+        if not self._basename_f:
             try:
-                self.__basename = os.path.basename(self._urlpath)
+                self._basename_f = os.path.basename(self.urlpath)
             except:
                 msg = 'Unexpected error: {}'.format(sys.exc_info()[0])
                 log.error(msg)
                 raise
 
-        return self.__basename
+        return self._basename_f
 
 
     def download(self):
@@ -89,7 +96,7 @@ class Url:
 
                 # Set property in the appropriate context, while we
                 # still have access to the data.
-                self.__responseurl = response.url
+                self.responseurl = response.url
         except ValueError as e:
             msg = 'Malformed or invalid URL'
             log.error(msg)
@@ -103,9 +110,11 @@ class Url:
             log.error(msg)
             raise
         else:
-            return temp_f.name, self._basename
+            return temp_f.name, self.basename_f
 
 
 # download_temp('https://www.bits4wuts.com/foo.txt')
 # download_temp('')
 # download_temp('https://github.com/bits4waves/100daysofpractice-dataset/raw/master/requirements.txt')
+my_url = Url('https://github.com/bits4waves/100daysofpractice-dataset/raw/master/requirements.txt')
+result = my_url.download()

@@ -67,10 +67,10 @@ class Url:
         if self.__basename is None:
             try:
                 self.__basename = os.path.basename(self._urlpath)
-            except e:
-                msg = 'Problems determining the basename'
+            except:
+                msg = 'Unexpected error: {}'.format(sys.exc_info()[0])
                 log.error(msg)
-                raise RuntimeError(msg) from e
+                raise
 
         return self.__basename
 
@@ -95,14 +95,14 @@ class Url:
         except urllib.error.URLError as e:
             print(error_msg.format(e.reason.strerror))
             raise
-        except e:
-            msg = 'Problems downloaing the file'
+        except:
+            msg = 'Unexpected error: {}'.format(sys.exc_info()[0])
             log.error(msg)
-            raise RuntimeError(msg) from e
+            raise
         else:
             return temp_f.name, self._basename
 
 
-download_temp('https://www.bits4wuts.com/foo.txt')
-download_temp('')
-download_temp('https://github.com/bits4waves/100daysofpractice-dataset/raw/master/requirements.txt')
+# download_temp('https://www.bits4wuts.com/foo.txt')
+# download_temp('')
+# download_temp('https://github.com/bits4waves/100daysofpractice-dataset/raw/master/requirements.txt')

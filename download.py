@@ -16,7 +16,7 @@ class Url:
 
     __responseurl = None
     __urlpath = None
-    _basename_f = None
+    __basename_f = None
 
 
     def __init__(self, url):
@@ -66,21 +66,21 @@ class Url:
 
 
     @property
-    def basename_f(self):
+    def _basename_f(self):
         """URL’s filename on the remote server.
 
         “Original” filename on the server from where it is being
         accessed."""
 
-        if not self._basename_f:
+        if not self.__basename_f:
             try:
-                self._basename_f = os.path.basename(self._urlpath)
+                self.__basename_f = os.path.basename(self._urlpath)
             except:
                 msg = 'Unexpected error: {}'.format(sys.exc_info()[0])
                 log.error(msg)
                 raise
 
-        return self._basename_f
+        return self.__basename_f
 
 
     def download(self):
@@ -110,7 +110,6 @@ class Url:
             log.error(msg)
             raise
         else:
-            return temp_f.name, self.basename_f
 
 
 # download_temp('https://www.bits4wuts.com/foo.txt')
@@ -118,3 +117,4 @@ class Url:
 # download_temp('https://github.com/bits4waves/100daysofpractice-dataset/raw/master/requirements.txt')
 my_url = Url('https://github.com/bits4waves/100daysofpractice-dataset/raw/master/requirements.txt')
 result = my_url.download()
+            return temp_f.name, self._basename_f

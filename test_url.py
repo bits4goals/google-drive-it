@@ -40,8 +40,7 @@ class TestUrl(unittest.TestCase):
 
 
     def test_init(self):
-        """New instance has the proper attributes with the proper
-        values."""
+        """New instance has the proper attributes with the proper values."""
 
         # instantiate with controlled URL
 

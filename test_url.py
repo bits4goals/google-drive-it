@@ -25,9 +25,9 @@ class TestUrlInit(unittest.TestCase):
     def test_attr_url(self):
         """Instantiation with URL preserves received value."""
 
-        for test_url in self.urls():
-            with self.subTest(test_url=test_url):
-                self.assertEqual(test_url, url.Url(test_url).url)
+        for url in self.urls_for_test():
+            with self.subTest(url=url):
+                self.assertEqual(url, urlm.Url(url).url)
 
 
 class TestUrlHiddenAttributes(unittest.TestCase):

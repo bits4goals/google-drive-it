@@ -6,7 +6,6 @@ import string
 import itertools
 
 
-class TestUrl(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls):
@@ -25,6 +24,8 @@ class TestUrl(unittest.TestCase):
     def tearDown(self):
         pass
 
+class TestUrlInit(unittest.TestCase):
+    """Url instantiation."""
 
     @staticmethod
     def test_urls():

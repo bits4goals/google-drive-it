@@ -15,7 +15,7 @@ class Url:
     """URL stuff."""
 
     __responseurl = None
-    _urlpath = None
+    __urlpath = None
     _basename_f = None
 
 
@@ -43,15 +43,15 @@ class Url:
 
 
     @property
-    def urlpath(self):
+    def _urlpath(self):
         """Result of parsing the object’s URL.
 
         It is obtained from the URL’s path, which may be different
         from the URL itself in some cases."""
 
-        if not self._urlpath:
+        if not self.__urlpath:
             try:
-                self._urlpath = \
+                self.__urlpath = \
                     urllib.parse.urlparse(self._responseurl).path
             except ValueError as e:
                 msg = 'Malformed URL'
@@ -62,7 +62,7 @@ class Url:
                 log.error(msg)
                 raise
 
-        return self._urlpath
+        return self.__urlpath
 
 
     @property
@@ -74,7 +74,7 @@ class Url:
 
         if not self._basename_f:
             try:
-                self._basename_f = os.path.basename(self.urlpath)
+                self._basename_f = os.path.basename(self._urlpath)
             except:
                 msg = 'Unexpected error: {}'.format(sys.exc_info()[0])
                 log.error(msg)

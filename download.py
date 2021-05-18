@@ -90,12 +90,14 @@ class Url:
                 # Set property in the appropriate context, while we
                 # still have access to the data.
                 self.__responseurl = response.url
-        except ValueError:
-            print(error_msg.format('Malformed or invalid URL'))
-            raise
+        except ValueError as e:
+            msg = 'Malformed or invalid URL'
+            log.error(msg)
+            raise RuntimeError(msg) from e
         except urllib.error.URLError as e:
-            print(error_msg.format(e.reason.strerror))
-            raise
+            msg = 'Problems accessing URL: {}'.format(e.reason.strerror)
+            log.error(msg)
+            raise RuntimeError(msg) from e
         except:
             msg = 'Unexpected error: {}'.format(sys.exc_info()[0])
             log.error(msg)

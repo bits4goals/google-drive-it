@@ -40,6 +40,12 @@ class TestUrlHiddenAttributes(unittest.TestCase):
     _basename_f
     """
 
-    pass
+    def test__responseurl_must_be_set_first(self):
+        """Raises error if trying to get _responseurl before setting it."""
+
+        with self.assertRaises(RuntimeError):
+            url.Url('')._responseurl
+
+
 if __name__ == '__main__':
     unittest.main()

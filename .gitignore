@@ -4,6 +4,6 @@
 venv
 client_secret.json
 __pycache__
-home
+localhost
 TAGS
 test.*

@@ -237,8 +237,9 @@ def print_index_table():
 
 
 if __name__ == '__main__':
-  # ‘home’ is a regular (empty) file used to tell the program to run locally.
-  if os.path.exists('home'):
+  # ‘localhost’ is a regular (empty) file used as a flag: if it is
+  # present, run locally.
+  if os.path.exists('localhost'):
     # When running locally, disable OAuthlib's HTTPs verification.
     # ACTION ITEM for developers:
     #     When running in production *do not* leave this option enabled.

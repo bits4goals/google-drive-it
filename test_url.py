@@ -18,8 +18,8 @@ class TestUrlInit(unittest.TestCase):
         params = ['', '?abc=cde', '?abc=cde&FgH=iJk!@#$%']
         randoms = ['', ''.join(random.choices(string.ascii_letters, k=32))]
 
-        for test_url in itertools.product(protocols, paths, params, randoms):
-            yield ''.join(test_url)
+        for comb in itertools.product(protocols, paths, params, randoms):
+            yield ''.join(comb)
 
 
     def test_url_attr(self):

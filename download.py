@@ -14,7 +14,7 @@ error_msg = 'Error: {}'
 class Url:
     """URL stuff."""
 
-    _responseurl = None
+    __responseurl = None
     _urlpath = None
     _basename_f = None
 
@@ -26,20 +26,20 @@ class Url:
 
 
     @property
-    def responseurl(self):
+    def _responseurl(self):
         """Return of ‘urllib.request.urlopen(URL)’."""
 
-        if not self._responseurl:
+        if not self.__responseurl:
             err_msg = 'Response URL must be set first'
             log.error(err_msg)
             raise RuntimeError(err_msg)
 
-        return self._responseurl
+        return self.__responseurl
 
 
-    @responseurl.setter
-    def responseurl(self, value):
-        self._responseurl = value
+    @_responseurl.setter
+    def _responseurl(self, value):
+        self.__responseurl = value
 
 
     @property
@@ -52,7 +52,7 @@ class Url:
         if not self._urlpath:
             try:
                 self._urlpath = \
-                    urllib.parse.urlparse(self.responseurl).path
+                    urllib.parse.urlparse(self._responseurl).path
             except ValueError as e:
                 msg = 'Malformed URL'
                 log.error(msg)
@@ -96,7 +96,7 @@ class Url:
 
                 # Set property in the appropriate context, while we
                 # still have access to the data.
-                self.responseurl = response.url
+                self._responseurl = response.url
         except ValueError as e:
             msg = 'Malformed or invalid URL'
             log.error(msg)

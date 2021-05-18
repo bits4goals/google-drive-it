@@ -6,7 +6,7 @@ import string
 import itertools
 
 
-RANDOM_STRING_LEN=32
+RANDOM_STRING_LEN=64
 
 
 def random_string(size=RANDOM_STRING_LEN, chars=string.ascii_letters):

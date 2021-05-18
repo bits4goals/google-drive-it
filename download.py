@@ -50,7 +50,8 @@ class Url:
                 log.error(msg)
                 raise RuntimeError(msg) from e
             except:
-                log.error('Problems parsing URL')
+                msg = 'Unexpected error: {}'.format(sys.exc_info()[0])
+                log.error(msg)
                 raise
 
         return self.__urlpath

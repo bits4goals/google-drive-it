@@ -6,7 +6,10 @@ import string
 import itertools
 
 
-def random_string(size, chars=string.ascii_letters):
+RANDOM_STRING_LEN=32
+
+
+def random_string(size=RANDOM_STRING_LEN, chars=string.ascii_letters):
     """Generate a random string of SIZE using CHARS."""
 
     return ''.join(random.choices(chars, k=size))

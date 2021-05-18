@@ -83,7 +83,7 @@ class Url:
         server."""
 
         try:
-            with urllib.request.urlopen(url) as response:
+            with urllib.request.urlopen(self.url) as response:
                 with tempfile.NamedTemporaryFile(delete=False) as temp_f:
                     shutil.copyfileobj(response, temp_f)
 

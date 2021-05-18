@@ -22,7 +22,7 @@ class TestUrlInit(unittest.TestCase):
             yield ''.join(comb)
 
 
-    def test_url_attr(self):
+    def test_attr_url(self):
         """Instantiation with URL preserves received value."""
 
         for test_url in self.urls():

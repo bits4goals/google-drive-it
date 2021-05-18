@@ -100,7 +100,7 @@ class Url:
             log.error(msg)
             raise RuntimeError(msg) from e
         else:
-            return temp_f.name, local_filepath
+            return temp_f.name, self._basename
 
 
 download_temp('https://www.bits4wuts.com/foo.txt')

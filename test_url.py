@@ -29,15 +29,8 @@ class TestUrlInit(unittest.TestCase):
                 self.assertEqual(url, urlm.Url(url).url)
 
 
-class TestUrlHiddenAttributes(unittest.TestCase):
-    """Attributes prefixed with ‘_’ work correctly.
-
-    These attributes are:
-
-    _responseurl
-    _urlpath
-    _basename_f
-    """
+class TestAttr_ResponseUrl(unittest.TestCase):
+    """Attribute works correctly."""
 
     def test__responseurl_must_be_set_first(self):
         """Raises error if trying to get _responseurl before setting it."""

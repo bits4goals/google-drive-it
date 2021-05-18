@@ -46,5 +46,15 @@ class TestUrlHiddenAttributes(unittest.TestCase):
             urlm.Url('')._responseurl
 
 
+    def test__responseurl_get(self):
+        """‘get’ works properly for ‘_responseurl’."""
+
+        url_obj = urlm.Url('')
+        for url in urls_for_test():
+            with self.subTest(url=url):
+                url_obj._responseurl = url
+                self.assertEqual(url_obj._responseurl, url)
+
+
 if __name__ == '__main__':
     unittest.main()

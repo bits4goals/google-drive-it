@@ -5,6 +5,7 @@ import os
 import tempfile
 import shutil
 import logging as log
+import sys
 
 
 error_msg = 'Error: {}'

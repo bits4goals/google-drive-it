@@ -22,10 +22,6 @@ class TestUrlInit(unittest.TestCase):
             yield ''.join(test_url)
 
 
-
-        # instantiate with controlled URL
-
-        # test attributes from the instance (including URL)
     def test_url(self):
         """Instantiation with URL preserves received value."""
 

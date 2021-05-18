@@ -43,7 +43,7 @@ class Url:
         Raises RuntimeError if trying to access it when it is not
         set."""
 
-        if not self.__responseurl:
+        if self.__responseurl is None:
             err_msg = 'Response URL must be set first'
             log.error(err_msg)
             raise RuntimeError(err_msg)

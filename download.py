@@ -43,7 +43,7 @@ class Url:
 
         if not self.__urlpath:
             try:
-                self.__urlpath =
+                self.__urlpath =\
                     urllib.parse.urlparse(self._responseurl).path
             except ValueError as e:
                 msg = 'Malformed URL'

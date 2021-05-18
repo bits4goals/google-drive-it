@@ -30,7 +30,7 @@ class TestUrlInit(unittest.TestCase):
 
 
 class TestAttr_ResponseUrl(unittest.TestCase):
-    """Attribute works correctly."""
+    """‘_responseurl’ works properly."""
 
     def test__responseurl_must_be_set_first(self):
         """Raises error if trying to get _responseurl before setting it."""

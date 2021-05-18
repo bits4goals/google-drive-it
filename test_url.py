@@ -43,7 +43,7 @@ class TestUrlHiddenAttributes(unittest.TestCase):
         """Raises error if trying to get _responseurl before setting it."""
 
         with self.assertRaises(RuntimeError):
-            url.Url('')._responseurl
+            urlm.Url('')._responseurl
 
 
 if __name__ == '__main__':

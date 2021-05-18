@@ -45,6 +45,10 @@ class TestUrl(unittest.TestCase):
 
         # test attributes from the instance (including URL)
 
+        for test_url in self.test_urls():
+            with self.subTest(test_url=test_url):
+                self.assertEqual(test_url, url.Url(test_url).url)
 
-if '__name__' == '__main__':
+
+if __name__ == '__main__':
     unittest.main()

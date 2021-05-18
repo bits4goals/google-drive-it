@@ -110,11 +110,4 @@ class Url:
             log.error(msg)
             raise
         else:
-
-
-# download_temp('https://www.bits4wuts.com/foo.txt')
-# download_temp('')
-# download_temp('https://github.com/bits4waves/100daysofpractice-dataset/raw/master/requirements.txt')
-my_url = Url('https://github.com/bits4waves/100daysofpractice-dataset/raw/master/requirements.txt')
-result = my_url.download()
             return temp_f.name, self._basename_f

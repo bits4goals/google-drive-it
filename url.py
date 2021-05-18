@@ -12,7 +12,7 @@ error_msg = 'Error: {}'
 
 
 class Url:
-    """URL stuff."""
+    """URL download and remote filename retrieval."""
 
     __responseurl = None
     __urlpath = None
@@ -27,7 +27,21 @@ class Url:
 
     @property
     def _responseurl(self):
-        """Return of ‘urllib.request.urlopen(URL)’."""
+        """Return of ‘urllib.request.urlopen(URL)’.
+
+        This property must be set before it can be accessed.
+        This can be done with:
+
+        with urllib.request.urlopen(self.url) as response:
+
+            <...>
+
+            self._responseurl = response.url
+
+            <...>
+
+        Raises RuntimeError if trying to access it when it is not
+        set."""
 
         if not self.__responseurl:
             err_msg = 'Response URL must be set first'
@@ -87,7 +101,10 @@ class Url:
         """Fetch file from URL and persist it locally as a temporary file.
 
         Returns the temporary filename and the original filename on the
-        server."""
+        server.
+
+        Raises RuntimeError if the URL is malformed or if there were
+        problems accessing it."""
 
         try:
             with urllib.request.urlopen(self.url) as response:

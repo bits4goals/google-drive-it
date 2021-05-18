@@ -19,7 +19,7 @@ CLIENT_SECRETS_FILE = "client_secret.json"
 # authenticated user's account and requires requests to use an SSL connection.
 SCOPES = ['https://www.googleapis.com/auth/drive']
 API_SERVICE_NAME = 'drive'
-API_VERSION = 'v2'
+API_VERSION = 'v3'
 
 app = flask.Flask(__name__)
 # Note: A secret key is included in the sample so that it works.

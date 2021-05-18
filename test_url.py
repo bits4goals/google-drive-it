@@ -8,11 +8,13 @@ import itertools
 
 class TestUrl(unittest.TestCase):
 
-    def setUpClass(self):
+    @classmethod
+    def setUpClass(cls):
         pass
 
 
-    def tearDownClass(self):
+    @classmethod
+    def tearDownClass(cls):
         pass
 
 

@@ -6,6 +6,12 @@ import string
 import itertools
 
 
+def random_string(size, chars=string.ascii_letters):
+    """Generate a random string of SIZE using CHARS."""
+
+    return ''.join(random.choices(chars, k=size))
+
+
 def urls_for_test():
     """URL generator."""
 

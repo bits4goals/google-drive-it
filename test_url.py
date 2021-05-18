@@ -10,7 +10,7 @@ class TestUrlInit(unittest.TestCase):
     """Url instantiation."""
 
     @staticmethod
-    def test_urls():
+    def urls():
         """Generate URLs."""
 
         protocols = ['', 'file:///', 'ftp://', 'http://', 'https://']
@@ -25,7 +25,7 @@ class TestUrlInit(unittest.TestCase):
     def test_url(self):
         """Instantiation with URL preserves received value."""
 
-        for test_url in self.test_urls():
+        for test_url in self.urls():
             with self.subTest(test_url=test_url):
                 self.assertEqual(test_url, url.Url(test_url).url)
 

@@ -30,5 +30,16 @@ class TestUrlInit(unittest.TestCase):
                 self.assertEqual(test_url, url.Url(test_url).url)
 
 
+class TestUrlHiddenAttributes(unittest.TestCase):
+    """Attributes prefixed with ‘_’ work correctly.
+
+    These attributes are:
+
+    _responseurl
+    _urlpath
+    _basename_f
+    """
+
+    pass
 if __name__ == '__main__':
     unittest.main()

@@ -21,7 +21,7 @@ def urls_for_test():
     protocols = ['', 'file:///', 'ftp://', 'http://', 'https://']
     paths = ['', 'home', 'home/foo', 'home/foo/bar.txt']
     params = ['', '?abc=cde', '?abc=cde&FgH=iJk!@#$%']
-    randoms = ['', random_string()
+    randoms = ['', random_string()]
 
     for comb in itertools.product(protocols, paths, params, randoms):
         yield ''.join(comb)

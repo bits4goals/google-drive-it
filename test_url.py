@@ -11,7 +11,7 @@ class TestUrlInit(unittest.TestCase):
 
     @staticmethod
     def urls():
-        """Generate URLs."""
+        """URL generator."""
 
         protocols = ['', 'file:///', 'ftp://', 'http://', 'https://']
         paths = ['', 'home', 'home/foo', 'home/foo/bar.txt']

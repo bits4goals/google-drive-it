@@ -10,7 +10,7 @@ class TestUrlInit(unittest.TestCase):
     """Url instantiation."""
 
     @staticmethod
-    def urls():
+    def urls_for_test():
         """URL generator."""
 
         protocols = ['', 'file:///', 'ftp://', 'http://', 'https://']

@@ -6,6 +6,7 @@ import random
 import string
 import itertools
 import logging
+import os.path
 
 
 RANDOM_STRING_LEN=64
@@ -146,6 +147,44 @@ class TestAttr_urlpath(unittest.TestCase):
 
                     with self.assertRaises(should_raise):
                         url_obj._urlpath
+
+
+class TestAtrr_basename(unittest.TestCase):
+    """‘_basename’ attribute works properly.
+
+    It’s assumed that ‘os.path.basename’ will be used.
+
+    Here we make sure that the program obtains the basename calling a trusted
+    method with the correct argument (the previously parsed URL).
+    Finally, we make sure that it assigns the exact return value of this method
+    to the corresponding object’s attribute (that will be ultimately returned
+    to the caller)."""
+
+    def test_uses__urlpath(self):
+        """Uses the proper method argument and honor its return value.
+
+        The argument in this case is the attribute ‘_urlpath’, and the return
+        value should be assigned to the attribute ‘_basename’."""
+
+        # Prepare an object for the test.
+        url_obj = urlm.Url(random_string())
+        url_obj._responseurl = random_string()
+
+        with unittest.mock.patch('os.path.basename') as basename_mock:
+            # Prepare the mock method’s return value.
+            basename_mock.return_value = random_string()
+
+            # The attribute being tested doesn’t have a setter, so it must be
+            # accessed beforehand to force its value to be set.
+            # This will also generate the call to ‘os.path.basename’, which is
+            # being tested.
+            url_obj._basename_f
+
+            # Check if the proper argument was used to call the method.
+            basename_mock.assert_called_with(url_obj._urlpath)
+
+            # Check if the returned value was properly assigned.
+            self.assertEqual(url_obj._basename_f, basename_mock.return_value)
 
 
 if __name__ == '__main__':

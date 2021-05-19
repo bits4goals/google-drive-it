@@ -63,9 +63,9 @@ class Test_UrlPath(unittest.TestCase):
     """‘_urlpath’ attribute works properly."""
 
     def test_uses_expected_method(self):
-        """Uses ‘urllib.parse.urlparse’, with the correct URL."""
+        """Uses ‘urllib.parse.urlparse’, with the correct URL.
 
-        # Assuming ‘urllib.parse.urlparse’ will be used.
+        It’s assumed that ‘urllib.parse.urlparse’ will be used."""
 
         # set its return value
         with unittest.mock.patch('urllib.parse.urlparse') as urlparse_mock:

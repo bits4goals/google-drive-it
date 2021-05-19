@@ -79,6 +79,14 @@ class Test_UrlPath(unittest.TestCase):
             responseurl = random_string()
             url_obj._responseurl = responseurl
 
+            # Get the mocked method ready to be called.
+            # Assigns the property ‘path’ to whatever is returned after calling
+            # ‘urlparse_mock()’.
+            # This is necessary because the parsed URL itself corresponds to the
+            # property ‘path’ from the object that is returned from the parsing
+            # method.
+            urlparse_mock().path = random_string()
+
             # Force test object to parse its URL, giving it a reason to call
             # ‘urllib.parse.urlparse’.
             urlpath = url_obj._urlpath
@@ -86,6 +94,9 @@ class Test_UrlPath(unittest.TestCase):
             # Check if ‘urllib.parse.urlparse’ was called, and with the correct
             # URL.
             urlparse_mock.assert_called_with(responseurl)
+
+            # Check if it assigned the attribute to the proper value.
+            self.assertEqual(url_obj._urlpath, urlparse_mock().path)
 
 
 if __name__ == '__main__':

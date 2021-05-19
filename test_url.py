@@ -27,6 +27,13 @@ def random_string(size=RANDOM_STRING_LEN, chars=string.ascii_letters):
     return ''.join(random.choices(chars, k=size))
 
 
+def builtin_exceptions():
+    """Generate builtin exception classes."""
+
+    for exception in (x for x in dir(__builtins__) if x.endswith('Error')):
+        yield eval(exception)
+
+
 def urls_for_test():
     """URL generator."""
 

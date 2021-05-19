@@ -95,7 +95,8 @@ class Test_UrlPath(unittest.TestCase):
             # URL.
             urlparse_mock.assert_called_with(responseurl)
 
-            # Check if it assigned the attribute to the proper value.
+            # Check if it assigned its attribute to the correct property from
+            # the return value of ‘urllib.parse.urlparse’.
             self.assertEqual(url_obj._urlpath, urlparse_mock().path)
 
 

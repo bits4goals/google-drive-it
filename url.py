@@ -16,7 +16,7 @@ class Url:
 
     __responseurl = None
     __urlpath = None
-    __basename_f = None
+    __basename = None
 
 
     def __init__(self, url):
@@ -83,7 +83,7 @@ class Url:
 
 
     @property
-    def _basename_f(self):
+    def _basename(self):
         """URL’s filename on the remote server.
 
         “Original” filename on the server from where it is being
@@ -91,15 +91,15 @@ class Url:
 
         Raises any errors that occur."""
 
-        if not self.__basename_f:
+        if not self.__basename:
             try:
-                self.__basename_f = os.path.basename(self._urlpath)
+                self.__basename = os.path.basename(self._urlpath)
             except:
                 msg = 'Unexpected error: {}'.format(sys.exc_info()[0])
                 log.error(msg)
                 raise
 
-        return self.__basename_f
+        return self.__basename
 
 
     def download(self):
@@ -132,4 +132,4 @@ class Url:
             log.error(msg)
             raise
         else:
-            return temp_f.name, self._basename_f
+            return temp_f.name, self._basename

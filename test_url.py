@@ -7,9 +7,11 @@ import string
 import itertools
 import logging
 import os.path
+import tempfile
 
 
 RANDOM_STRING_LEN=64
+TEMP_FILE_SIZE=1024
 
 
 def setUpModule():
@@ -33,6 +35,15 @@ def builtin_exceptions():
 
     for exception in (x for x in dir(__builtins__) if x.endswith('Error')):
         yield eval(exception)
+
+
+def random_file():
+    """Create a temporary file with random contents and return its path."""
+
+    with tempfile.NamedTemporaryFile(delete=False) as f:
+        f.write(os.urandom(TEMP_FILE_SIZE))
+
+    return f.name
 
 
 def urls_for_test():

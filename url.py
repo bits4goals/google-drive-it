@@ -61,7 +61,10 @@ class Url:
         """Result of parsing the object’s URL.
 
         It is obtained from the URL’s path, which may be different
-        from the URL itself in some cases."""
+        from the URL itself in some cases.
+
+        Raises RuntimeError if URL is malformed.
+        Raises unexpected errors."""
 
         if not self.__urlpath:
             try:

@@ -188,6 +188,27 @@ class TestAtrr_basename(unittest.TestCase):
 
             # Check if the returned value was properly assigned.
             self.assertEqual(self.url_obj._basename,
+                             basename_mock.return_value)
+
+
+    def test_raises_errors(self):
+        """Raises errors as promised in the docstring."""
+
+        with unittest.mock.patch('os.path.basename') as basename_mock:
+            # Make the mocked method raises the proper error when called.
+            for exception in builtin_exceptions():
+                # Skip more tricky Unicode exceptions for this test.
+                if exception.__name__.startswith('Unicode'):
+                    continue
+
+                with self.subTest(exception=exception):
+                    basename_mock.side_effect = exception
+
+                    # Check if the expected error was raised as a result.
+                    # For this, it suffices to get the attribute, which will
+                    # then call ‘os.path.basename’.
+                    with self.assertRaises(exception):
+                        self.url_obj._basename
 
 
 if __name__ == '__main__':

@@ -57,7 +57,7 @@ class TestUrlInit(unittest.TestCase):
                 self.assertEqual(url, urlm.Url(url).url)
 
 
-class TestAttr_ResponseUrl(unittest.TestCase):
+class TestAttr_responseurl(unittest.TestCase):
     """‘_responseurl’ attribute works properly."""
 
     def test__responseurl_must_be_set_first(self):
@@ -77,7 +77,7 @@ class TestAttr_ResponseUrl(unittest.TestCase):
                 self.assertEqual(url_obj._responseurl, url)
 
 
-class Test_UrlPath(unittest.TestCase):
+class TestAttr_urlpath(unittest.TestCase):
     """‘_urlpath’ attribute works properly."""
 
     def test_uses_expected_method(self):

@@ -50,8 +50,8 @@ def urls_for_test():
 class TestUrlInit(unittest.TestCase):
     """Url instantiation."""
 
-    def test_attr_url(self):
-        """Instantiation with URL preserves received value."""
+    def test_preserves_url(self):
+        """Instantiation with URL honor received value."""
 
         for url in urls_for_test():
             with self.subTest(url=url):

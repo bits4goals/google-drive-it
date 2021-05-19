@@ -1,4 +1,5 @@
 import unittest
+import unittest.mock
 import url as urlm
 import itertools
 import random
@@ -56,6 +57,35 @@ class TestAttr_ResponseUrl(unittest.TestCase):
             with self.subTest(url=url):
                 url_obj._responseurl = url
                 self.assertEqual(url_obj._responseurl, url)
+
+
+class Test_UrlPath(unittest.TestCase):
+    """‘_urlpath’ attribute works properly."""
+
+    def test_uses_expected_method(self):
+        """Calls ‘urllib.parse.urlparse’ with correct URL and uses return value."""
+
+        # Assuming ‘urllib.parse.urlparse’ will be used.
+
+        # set its return value
+        with unittest.mock.patch('urllib.parse.urlparse') as urlparse_mock:
+            # Get a test Url instance ready.
+            url_obj = urlm.Url(random_string())
+
+            # Using another random string for the attribute ‘_responseurl’ to
+            # have an independent test that the program sets and gets it
+            # properly, and that it does not change it before using it to
+            # obtain ‘_urlpath’.
+            responseurl = random_string()
+            url_obj._responseurl = responseurl
+
+            # Force test object to parse its URL, giving it a reason to call
+            # ‘urllib.parse.urlparse’.
+            urlpath = url_obj._urlpath
+
+            # Check if ‘urllib.parse.urlparse’ was called, and with the correct
+            # URL.
+            urlparse_mock.assert_called_with(responseurl)
 
 
 if __name__ == '__main__':

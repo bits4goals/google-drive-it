@@ -125,6 +125,7 @@ class Test_UrlPath(unittest.TestCase):
         with unittest.mock.patch('urllib.parse.urlparse') as urlparse_mock:
             # Create a test object.
             url_obj = urlm.Url(random_string())
+            url_obj._responseurl = random_string()
 
             # Make the mocked method raise the proper error when called.
             urlparse_mock.side_effect = ValueError

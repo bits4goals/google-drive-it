@@ -67,7 +67,6 @@ class Test_UrlPath(unittest.TestCase):
 
         It’s assumed that ‘urllib.parse.urlparse’ will be used."""
 
-        # set its return value
         with unittest.mock.patch('urllib.parse.urlparse') as urlparse_mock:
             # Get a test Url instance ready.
             url_obj = urlm.Url(random_string())

@@ -126,7 +126,7 @@ class TestAttr_urlpath(unittest.TestCase):
             url_obj = urlm.Url(random_string())
             url_obj._responseurl = random_string()
 
-            # Make the mocked method raise the proper error when called.
+            # Make the mocked method raises the proper error when called.
             for exception in builtin_exceptions():
                 # Skip more tricky Unicode exceptions for this test.
                 if exception.__name__.startswith('Unicode'):

@@ -63,7 +63,7 @@ class Test_UrlPath(unittest.TestCase):
     """‘_urlpath’ attribute works properly."""
 
     def test_uses_expected_method(self):
-        """Calls ‘urllib.parse.urlparse’ with correct URL and uses return value."""
+        """Uses ‘urllib.parse.urlparse’, with the correct URL."""
 
         # Assuming ‘urllib.parse.urlparse’ will be used.
 

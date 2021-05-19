@@ -99,5 +99,24 @@ class Test_UrlPath(unittest.TestCase):
             self.assertEqual(url_obj._urlpath, urlparse_mock().path)
 
 
+    def test_raises_errors(self):
+        """Raises errors as promised in the docstring."""
+
+        # Check if a RuntimeError is raised as a result of a ValueError
+        # triggered by a malformed URL.
+        with unittest.mock.patch('urllib.parse.urlparse') as urlparse_mock:
+            # Create a test object.
+            url_obj = urlm.Url(random_string())
+
+            # Make the mocked method raise the proper error when called.
+            urlparse_mock.side_effect = ValueError
+
+            # Check if the expected error was raised as a result.
+            # For this it suffices to get the attribute, which will then call
+            # ‘urllib.parse.urlparse’.
+            with self.assertRaises(RuntimeError):
+                url_obj._urlpath
+
+
 if __name__ == '__main__':
     unittest.main()

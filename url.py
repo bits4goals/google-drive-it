@@ -87,7 +87,9 @@ class Url:
         """URL’s filename on the remote server.
 
         “Original” filename on the server from where it is being
-        accessed."""
+        accessed.
+
+        Raises any errors that occur."""
 
         if not self.__basename_f:
             try:

@@ -5,9 +5,20 @@ import itertools
 import random
 import string
 import itertools
+import logging
 
 
 RANDOM_STRING_LEN=64
+
+
+def setUpModule():
+    """Disable logging while doing these tests."""
+    logging.disable()
+
+
+def tearDownModule():
+    """Re-enable logging after doing these tests."""
+    logging.disable(logging.NOTSET)
 
 
 def random_string(size=RANDOM_STRING_LEN, chars=string.ascii_letters):

@@ -275,21 +275,26 @@ class TestDownload(unittest.TestCase):
 
                 # Use a mock for the attribute ‘_basename’ to avoid having to
                 # mock both ‘os.path.basename’ and ‘urllib.parse.urlparse’.
-                with unittest.mock.patch('url.Url._basename') \
-                     as _basename_mock:
-                    _basename_mock.return_value = ''
+                with unittest.mock.patch('url.Url._basename',
+                                     new_callable=unittest.mock.PropertyMock) \
+                                 as _basename_mock:
+                    _basename_test = random_string()
+                    _basename_mock.return_value = _basename_test
 
                     # This mock is necessary as the property is accessed inside
                     # the method ‘download()’ being tested.
                     urlopen_mock().url = ''
 
-                    f_downloaded, _ = self.url_obj.download()
+                    f_downloaded, f__basename = self.url_obj.download()
 
         # Check if it was saved in the temporary directory.
         self.assertEqual(os.path.dirname(f_downloaded), tempfile.gettempdir())
 
         # Check the integrity of the dowloaded file.
         self.assertTrue(filecmp.cmp(f_downloaded, self.f_remote))
+
+        # Check if it returned the correct basename of the remote file.
+        self.assertEqual(f__basename, _basename_test)
 
         os.remove(f_downloaded)
 

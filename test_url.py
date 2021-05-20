@@ -288,5 +288,6 @@ class TestDownload(unittest.TestCase):
 
         os.remove(f_downloaded)
 
+
 if __name__ == '__main__':
     unittest.main()

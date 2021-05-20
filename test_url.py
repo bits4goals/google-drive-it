@@ -265,7 +265,7 @@ class TestDownload(unittest.TestCase):
 
 
     def test_download(self):
-        """Fetch file from URL and persist it locally as a temporary file."""
+        """Fetches remote file and name, persists it and returns filenames."""
 
         with open(self.f_remote, 'w+b') as f:
             with unittest.mock.patch('urllib.request.urlopen') as urlopen_mock:

@@ -263,7 +263,7 @@ class TestDownload(unittest.TestCase):
         os.remove(self.f_remote)
 
 
-    def test_fetch_persist(self):
+    def test_download(self):
         """Fetch file from URL and persist it locally as a temporary file."""
 
         with open(self.f_remote, 'w+b') as f:

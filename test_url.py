@@ -243,5 +243,20 @@ class TestAtrr_basename(unittest.TestCase):
                         self.url_obj._basename
 
 
+class TestDownload(unittest.TestCase):
+    """Correctly obtains and persists URL’s file."""
+
+    def setUp(self):
+        """Create a temporary file to mock the URL’s file."""
+
+        self.f = temporary_file()
+
+
+    def tearDown(self):
+        """Remove the temporary test file."""
+
+        os.remove(self.f)
+
+
 if __name__ == '__main__':
     unittest.main()

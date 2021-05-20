@@ -162,7 +162,7 @@ class TestAttr_urlpath(unittest.TestCase):
 
             # Make the mocked method raises the proper error when called.
             for exception in builtin_exceptions():
-                # Skip more tricky Unicode exceptions for this test.
+                # Skip trickier Unicode exceptions.
                 if exception.__name__.startswith('Unicode'):
                     continue
 
@@ -231,7 +231,7 @@ class TestAtrr_basename(unittest.TestCase):
         with unittest.mock.patch('os.path.basename') as basename_mock:
             # Make the mocked method raises the proper error when called.
             for exception in builtin_exceptions():
-                # Skip more tricky Unicode exceptions for this test.
+                # Skip trickier Unicode exceptions.
                 if exception.__name__.startswith('Unicode'):
                     continue
 

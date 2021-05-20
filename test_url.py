@@ -247,9 +247,12 @@ class TestDownload(unittest.TestCase):
     """Correctly obtains and persists URL’s file."""
 
     def setUp(self):
-        """Create a temporary file to mock the URL’s file."""
+        """Create test file to be downloaded and test object to do it."""
 
         self.f = temporary_file()
+
+        self.url_obj = urlm.Url(random_string())
+        self.url_obj._responseurl = random_string()
 
 
     def tearDown(self):

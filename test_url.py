@@ -37,7 +37,7 @@ def builtin_exceptions():
         yield eval(exception)
 
 
-def random_file():
+def random_temp_file():
     """Create a temporary file with random contents and return its path."""
 
     with tempfile.NamedTemporaryFile(delete=False) as f:
@@ -249,7 +249,7 @@ class TestDownload(unittest.TestCase):
     def setUp(self):
         """Create test file to be downloaded and test object to do it."""
 
-        self.f = temporary_file()
+        self.f = random_temp_file()
 
         self.url_obj = urlm.Url(random_string())
         self.url_obj._responseurl = random_string()

@@ -25,6 +25,8 @@
   </tr>
 </table>
 
-<form action="/request">
-  <input type="submit">
+<form action="{{ url_for('index') }}">
+  <label for="input-text-url">Link</label>
+  <input type="text" id="input-text-url">
+  <input type="submit" value="DriveIt!">
 </form>

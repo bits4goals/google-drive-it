@@ -10,6 +10,7 @@ import os
 import os.path
 import tempfile
 import filecmp
+import urllib
 
 
 RANDOM_STRING_LEN=64
@@ -290,6 +291,38 @@ class TestDownload(unittest.TestCase):
         self.assertTrue(filecmp.cmp(f_downloaded, self.f_remote))
 
         os.remove(f_downloaded)
+
+
+    def test_raises_errors(self):
+        """Raises exceptions as promised in the docstring"""
+
+        with unittest.mock.patch('urllib.request.urlopen') as urlopen_mock:
+            exceptions = list(builtin_exceptions())
+            URLError = urllib.error.URLError
+            exceptions.append(URLError)
+            for exception in exceptions:
+                # Skip trickier Unicode exceptions.
+                if exception.__name__.startswith('Unicode'):
+                    continue
+
+                # Raises RuntimeError when ValueError or urllib.error.URLError
+                # were raised, which are triggered by a malformed URL or if
+                # there were problems accessing it, respectively.
+                # Raises the exception itself for all others.
+                with self.subTest(exception=exception):
+                    urlopen_mock.side_effect = exception
+                    if exception is ValueError:
+                        expected_exception = RuntimeError
+                    elif exception is urllib.error.URLError:
+                        # This exception must be initialized with an argument
+                        # that has the property ‘strerror’ (‘OSError’ does).
+                        urlopen_mock.side_effect = exception(OSError)
+                        expected_exception = RuntimeError
+                    else:
+                        expected_exception = exception
+
+                    with self.assertRaises(expected_exception):
+                        self.url_obj.download()
 
 
 if __name__ == '__main__':

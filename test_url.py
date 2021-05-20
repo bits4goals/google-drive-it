@@ -265,7 +265,10 @@ class TestDownload(unittest.TestCase):
 
 
     def test_download(self):
-        """Fetches remote file and name, persists it and returns filenames."""
+        """Fetches and persists file from URL and returns filenames.
+
+        The filenames are the original remote name of the file and the name
+        used to save it after the download."""
 
         with open(self.f_remote, 'w+b') as f:
             with unittest.mock.patch('urllib.request.urlopen') as urlopen_mock:

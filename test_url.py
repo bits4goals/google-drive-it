@@ -249,7 +249,7 @@ class TestDownload(unittest.TestCase):
     def setUp(self):
         """Create test file to be downloaded and test object to do it."""
 
-        self.f = random_temp_file()
+        self.f_remote = random_temp_file()
 
         self.url_obj = urlm.Url(random_string())
         self.url_obj._responseurl = random_string()
@@ -258,7 +258,7 @@ class TestDownload(unittest.TestCase):
     def tearDown(self):
         """Remove the temporary test file."""
 
-        os.remove(self.f)
+        os.remove(self.f_remote)
 
 
 if __name__ == '__main__':

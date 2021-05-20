@@ -22,6 +22,9 @@ class Url:
     def __init__(self, url):
         """Use URL for the new instantiated object."""
 
+        if type(url) is not str:
+            raise TypeError('URL must be a string')
+
         self.url = url
 
 

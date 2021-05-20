@@ -284,6 +284,8 @@ class TestDownload(unittest.TestCase):
 
                     f_downloaded, _ = self.url_obj.download()
 
+        # Check if it was saved in the temporary directory.
+        self.assertEqual(os.path.dirname(f_downloaded), tempfile.gettempdir())
         # Check the integrity of the dowloaded file.
         self.assertTrue(filecmp.cmp(f_downloaded, self.f_remote))
 

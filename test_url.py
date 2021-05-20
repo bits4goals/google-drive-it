@@ -6,8 +6,10 @@ import random
 import string
 import itertools
 import logging
+import os
 import os.path
 import tempfile
+import filecmp
 
 
 RANDOM_STRING_LEN=64
@@ -260,6 +262,31 @@ class TestDownload(unittest.TestCase):
 
         os.remove(self.f_remote)
 
+
+    def test_fetch_persist(self):
+        """Fetch file from URL and persist it locally as a temporary file."""
+
+        with open(self.f_remote, 'w+b') as f:
+            with unittest.mock.patch('urllib.request.urlopen') as urlopen_mock:
+                # Use the local random temporary file to mock a remote file
+                # to be downloaded.
+                urlopen_mock.return_value = f
+
+                # Use a mock for the attribute ‘_basename’ to avoid having to
+                # mock both ‘os.path.basename’ and ‘urllib.parse.urlparse’.
+                with unittest.mock.patch('url.Url._basename') \
+                     as _basename_mock:
+                    _basename_mock.return_value = ''
+
+                    # This mock is necessary as the property is accessed inside
+                    # the method ‘download()’ being tested.
+                    urlopen_mock().url = ''
+
+                    f_downloaded, _ = self.url_obj.download()
+
+        self.assertTrue(filecmp.cmp(f_downloaded, self.f_remote))
+
+        os.remove(f_downloaded)
 
 if __name__ == '__main__':
     unittest.main()

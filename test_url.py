@@ -284,6 +284,7 @@ class TestDownload(unittest.TestCase):
 
                     f_downloaded, _ = self.url_obj.download()
 
+        # Check the integrity of the dowloaded file.
         self.assertTrue(filecmp.cmp(f_downloaded, self.f_remote))
 
         os.remove(f_downloaded)

@@ -129,7 +129,7 @@ class Url:
             log.error(msg)
             raise RuntimeError(msg) from e
         except urllib.error.URLError as e:
-            msg = 'Problems accessing URL: {}'.format(e.reason.strerror)
+            msg = 'Problems accessing URL: {}'.format(str(e))
             log.error(msg)
             raise RuntimeError(msg) from e
         except:

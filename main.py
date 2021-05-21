@@ -37,7 +37,10 @@ def index():
     url = urlm.Url(flask.request.form['url'])
     local_filename, remote_basename = url.download()
 
-  return flask.render_template('index.html', url=url)
+  return flask.render_template('index.html',
+                               url=url,
+                               local_filename=local_filename,
+                               remote_basename=remote_basename)
 
 
 @app.route('/test')

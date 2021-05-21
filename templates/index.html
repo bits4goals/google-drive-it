@@ -23,9 +23,12 @@
         API request</a> again, you should go back to the auth flow.
     </td>
   </tr>
+  <tr>
+    URL received: {{url}}
+  </tr>
 </table>
 
-<form action="{{ url_for('index') }}">
+<form method="post">
   <label for="url">Link</label>
   <input type="url" id="url">
   <input type="submit" value="DriveIt!">

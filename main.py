@@ -32,7 +32,7 @@ app.secret_key = 'REPLACE ME - this value is here as a placeholder.'
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-  url, local_filename, remote_basename = None, None, None
+  url, local_filename, remote_basename, error = None, None, None, None
   if flask.request.method == 'POST':
     url = urlm.Url(flask.request.form['url'])
     try:
@@ -45,7 +45,8 @@ def index():
   return flask.render_template('index.html',
                                url=url,
                                local_filename=local_filename,
-                               remote_basename=remote_basename)
+                               remote_basename=remote_basename,
+                               error=error)
 
 
 @app.route('/test')

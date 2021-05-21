@@ -35,7 +35,12 @@ def index():
   url, local_filename, remote_basename = None, None, None
   if flask.request.method == 'POST':
     url = urlm.Url(flask.request.form['url'])
-    local_filename, remote_basename = url.download()
+    try:
+      local_filename, remote_basename = url.download()
+    except RuntimeError as e:
+      error = str(e)
+    except:
+      error = 'Unexpected error: {}'.format(sys.exc_info()[0])
 
   return flask.render_template('index.html',
                                url=url,

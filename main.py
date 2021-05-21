@@ -33,7 +33,6 @@ app.secret_key = 'REPLACE ME - this value is here as a placeholder.'
 @app.route('/', methods=['GET', 'POST'])
 def index():
   if flask.request.method == 'POST':
-
     url = url.Url(flask.request.form['url'])
   else:
     url = None

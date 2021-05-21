@@ -11,6 +11,7 @@ import googleapiclient.discovery
 import json
 
 import logging
+import url
 
 # This variable specifies the name of a file that contains the OAuth 2.0
 # information for this application, including its client_id and client_secret.
@@ -32,7 +33,8 @@ app.secret_key = 'REPLACE ME - this value is here as a placeholder.'
 @app.route('/', methods=['GET', 'POST'])
 def index():
   if flask.request.method == 'POST':
-    url = flask.request.form['url']
+
+    url = url.Url(flask.request.form['url'])
   else:
     url = None
 

@@ -35,8 +35,7 @@ def index():
   url, local_filename, remote_basename = None, None, None
   if flask.request.method == 'POST':
     url = urlm.Url(flask.request.form['url'])
-  else:
-    url = None
+    local_filename, remote_basename = url.download()
 
   return flask.render_template('index.html', url=url)
 

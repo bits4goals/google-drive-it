@@ -33,6 +33,11 @@ app.secret_key = 'REPLACE ME - this value is here as a placeholder.'
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+  # Download file from the URL to a local temporary file.
+  # tmp_filename: complete path to the downloaded file (random name,
+  #   without extension)
+  # remote_basename: filename with extension of the downloaded file as it was
+  #   called on the remote server from which it was downloaded.
   if flask.request.method == 'POST':
     try:
       tmp_filename, remote_basename = urlm.Url(request.form['url']).download()

@@ -65,8 +65,37 @@ def index():
     'https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable',
     headers=headers,
     data=json.dumps(params))
-  status_code = getattr(request, 'status_code')
-  upload_url = request.headers['Location']
+  if getattr(request, 'status_code') == 200:
+    upload_url = request.headers['Location']
+
+  # The upload will be done with multiple HTTP requests.
+  with open(file_path, 'rb') as f:
+    # The file will be upload in chunks.
+    # First, determine the total size for the stop condition.
+    file_size = str(os.path.getsize(file_path))
+    current_byte = 0
+    for chunk in get_chunks(f):
+      # Determine, for the current chunk, the positions of the first and last
+      # bytes relative to the entire file.  This is so it knows what has to be
+      # uploaded in this iteration.
+      content_range = 'bytes ' + \
+        str(current_byte) + \
+        '-' + \
+        str(current_byte + len(chunk) - 1) + \
+        '/' + \
+        str(file_size)
+      headers = {'Content-Range': content_range}
+
+      # Send the upload request for the API with the current data chunk.
+      request = requests.put(upload_url, headers=headers, data=chunk)
+
+      # From the docs: “A ‘200 OK’ or ‘201 Created’ response indicates that the
+      # was completed, and no further action is necessary.”
+      if getattr(request, 'status_code') in (200, 201):
+        break
+
+      current_byte = int(request.headers['Range'].split('-')[-1]) + 1
+
 
   return flask.render_template('index.html',
                                url=url,
@@ -178,32 +207,6 @@ Source: https://stackoverflow.com/a/519653/3684790"""
 
 @app.route('/upload/<path:url>')
 def upload(url):
-  with open(file_path, 'rb') as f:
-    file_size = str(os.path.getsize(file_path))
-    current_byte = 0
-    for chunk in get_chunks(f):
-      content_range = 'bytes ' + \
-        str(current_byte) + \
-        '-' + \
-        str(current_byte + len(chunk) - 1) + \
-        '/' + \
-        str(file_size)
-      headers = {'Content-Range': content_range}
-
-      request = requests.put(upload_url,
-                             headers=headers,
-                             data=chunk)
-
-      response = getattr(request, 'status_code')
-      if response in (200, 201):
-        break
-
-      print(content_range)
-      print(upload_url)
-      print(request)
-
-      current_byte = int(request.headers['Range'].split('-')[-1]) + 1
-
   return f'status_code: {status_code}<br>upload_url: {upload_url}'
 
 

@@ -42,6 +42,30 @@ def index():
     except:
       error = 'Unexpected error: {}'.format(sys.exc_info()[0])
 
+  # Instantiate the object with the OAuth credentials that will be used to
+  # obtain upload access to the Google Drive.
+  credentials = google.oauth2.credentials.\
+    Credentials(**flask.session['credentials'])
+
+  # The file will be uploaded via a POST request.
+  # First, the initial request will be sent with the OAuth credentials.
+  # If the initial request succeeds, the API will return the URL to be used
+  # for the upload.
+  # Here the configuration for the initial request is prepared.
+  headers = {'Authorization': 'Bearer ' + credentials.token,
+             'Content-Type': 'application/json'}
+  params = {'name': os.path.basename(file_path)}
+
+  # Send the initial request, obtaining:
+  # status_code: “200 OK” when it succeeds
+  # upload_url: when it succeeds, this is the URL to use for the upload.
+  request = requests.post(
+    'https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable',
+    headers=headers,
+    data=json.dumps(params))
+  status_code = getattr(request, 'status_code')
+  upload_url = request.headers['Location']
+
   return flask.render_template('index.html',
                                url=url,
                                local_filename=local_filename,
@@ -152,38 +176,6 @@ Source: https://stackoverflow.com/a/519653/3684790"""
 
 @app.route('/upload/<path:url>')
 def upload(url):
-  credentials = google.oauth2.credentials.Credentials(
-    **flask.session['credentials'])
-
-  headers = {'Authorization': 'Bearer ' + credentials.token,
-             'Content-Type': 'application/json'}
-
-  # This is necessary because ‘@app.route()’ removes consecutive ‘/’
-  # (which may be present in the received URL).
-  url = url.replace('http:/', 'http://')
-  url = url.replace('https:/', 'https://')
-
-  # Download it as a temporary file using the received url.
-  filepath, filename = download_temp(url)
-  with tempfile.TemporaryDirectory() as temp_dir:
-    try:
-      r = requests.get(url)
-    except requests.exceptions.RequestException as e:
-      raise SystemExit(e)
-
-    f.write(r.content)
-    wav_filename = f.name
-
-  params = {'name': os.path.basename(file_path)}
-
-  request = requests.post(
-    'https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable',
-    headers=headers,
-    data=json.dumps(params))
-
-  status_code = getattr(request, 'status_code')
-  upload_url = request.headers['Location']
-
   with open(file_path, 'rb') as f:
     file_size = str(os.path.getsize(file_path))
     current_byte = 0

@@ -2,6 +2,7 @@
 
 import os
 import flask
+from flask import request
 import requests
 
 import google.oauth2.credentials
@@ -32,15 +33,11 @@ app.secret_key = 'REPLACE ME - this value is here as a placeholder.'
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-  url, local_filename, remote_basename, error = None, None, None, None
   if flask.request.method == 'POST':
-    url = urlm.Url(flask.request.form['url'])
     try:
-      local_filename, remote_basename = url.download()
+      tmp_filename, remote_basename = urlm.Url(request.form['url']).download()
     except RuntimeError as e:
       error = str(e)
-    except:
-      error = 'Unexpected error: {}'.format(sys.exc_info()[0])
 
   # Instantiate the object with the OAuth credentials that will be used to
   # obtain upload access to the Google Drive.

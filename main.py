@@ -59,8 +59,8 @@ def index():
   params = {'name': os.path.basename(file_path)}
 
   # Send the initial request, obtaining:
-  # status_code: “200 OK” when it succeeds
-  # upload_url: when it succeeds, this is the URL to use for the upload.
+  # status code: “200 OK” when it succeeds
+  # location: when it succeeds, this is the URL to be used for the upload.
   request = requests.post(
     'https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable',
     headers=headers,

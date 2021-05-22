@@ -150,7 +150,7 @@ Source: https://stackoverflow.com/a/519653/3684790"""
     yield data
 
 
-@app.route('/upload/<path:file_url>')
+@app.route('/upload/<path:url>')
 def upload(url):
   credentials = google.oauth2.credentials.Credentials(
     **flask.session['credentials'])

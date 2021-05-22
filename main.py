@@ -158,7 +158,6 @@ def upload(url):
   headers = {'Authorization': 'Bearer ' + credentials.token,
              'Content-Type': 'application/json'}
 
-  file_path = 'avatar.jpg'
   # This is necessary because ‘@app.route()’ removes consecutive ‘/’
   # (which may be present in the received URL).
   url = url.replace('http:/', 'http://')

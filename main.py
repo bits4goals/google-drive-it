@@ -33,9 +33,15 @@ app.secret_key = 'REPLACE ME - this value is here as a placeholder.'
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+  # Fetch the OAuth credentials that will be used to obtain upload access to
+  # the Google Drive.
+  credentials = google.oauth2.credentials.\
+    Credentials(**flask.session['credentials'])
+
   if flask.request.method == 'POST':
     try:
-      tmp_filename, remote_basename = urlm.Url.drive_it(request.form['url'])
+      tmp_filename, remote_basename = \
+        urlm.Url.drive_it(request.form['url'], credentials)
     except RuntimeError as e:
       error = str(e)
 

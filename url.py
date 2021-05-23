@@ -150,11 +150,10 @@ class Url:
         # remote_basename: filename with extension of the downloaded file as it
         #                  was called on the remote server from which it was
         #                  downloaded.
-        if flask.request.method == 'POST':
-            try:
-                tmp_filename, remote_basename = urlm.Url(request.form['url']).download()
-            except RuntimeError as e:
-                error = str(e)
+        try:
+            tmp_filename, remote_basename = urlm.Url(request.form['url']).download()
+        except RuntimeError as e:
+            error = str(e)
 
         # Instantiate the object with the OAuth credentials that will be used to
         # obtain upload access to the Google Drive.

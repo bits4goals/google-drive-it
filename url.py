@@ -147,7 +147,7 @@ class Url:
         return f.read(size)
 
 
-    @classsmethod
+    @classmethod
     def drive_it(cls, url, oauth_token):
         """Saves the file from URL to Google Drive using OAUTH_TOKEN."""
 

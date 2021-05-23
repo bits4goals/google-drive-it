@@ -140,6 +140,7 @@ class Url:
             return temp_f.name, self._basename
 
 
+    @staticmethod
     def chunk(f, first, size):
         """Return size bytes from f starting on first."""
 

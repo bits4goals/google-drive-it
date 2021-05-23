@@ -334,5 +334,23 @@ class TestDownload(unittest.TestCase):
                         self.url_obj.download()
 
 
+class TestChunk(unittest.TestCase):
+    """Correctly chunk file."""
+
+    def setUp(self):
+        """Create test object and file."""
+
+        self.f = random_temp_file()
+
+        self.url_obj = urlm.Url(random_string())
+        self.url_obj._responseurl = random_string()
+
+
+    def tearDown(self):
+        """Remove the temporary test file."""
+
+        os.remove(self.f)
+
+
 if __name__ == '__main__':
     unittest.main()

@@ -33,69 +33,11 @@ app.secret_key = 'REPLACE ME - this value is here as a placeholder.'
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-  # Download file from the URL to a local temporary file.
-  # tmp_filename: complete path to the downloaded file (random name,
-  #   without extension)
-  # remote_basename: filename with extension of the downloaded file as it was
-  #   called on the remote server from which it was downloaded.
   if flask.request.method == 'POST':
     try:
-      tmp_filename, remote_basename = urlm.Url(request.form['url']).download()
+      tmp_filename, remote_basename = urlm.Url.drive_it(request.form['url'])
     except RuntimeError as e:
       error = str(e)
-
-  # Instantiate the object with the OAuth credentials that will be used to
-  # obtain upload access to the Google Drive.
-  credentials = google.oauth2.credentials.\
-    Credentials(**flask.session['credentials'])
-
-  # The file will be uploaded via a POST request.
-  # First, the initial request will be sent with the OAuth credentials.
-  # If the initial request succeeds, the API will return the URL to be used
-  # for the upload.
-  # Here the configuration for the initial request is prepared.
-  headers = {'Authorization': 'Bearer ' + credentials.token,
-             'Content-Type': 'application/json'}
-  params = {'name': os.path.basename(file_path)}
-
-  # Send the initial request, obtaining:
-  # status code: “200 OK” when it succeeds
-  # location: when it succeeds, this is the URL to be used for the upload.
-  request = requests.post(
-    'https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable',
-    headers=headers,
-    data=json.dumps(params))
-  if getattr(request, 'status_code') == 200:
-    upload_url = request.headers['Location']
-
-  # The upload will be done with multiple HTTP requests.
-  with open(file_path, 'rb') as f:
-    # The file will be upload in chunks.
-    # First, determine the total size for the stop condition.
-    file_size = str(os.path.getsize(file_path))
-    current_byte = 0
-    for chunk in get_chunks(f):
-      # Determine, for the current chunk, the positions of the first and last
-      # bytes relative to the entire file.  This is so it knows what has to be
-      # uploaded in this iteration.
-      content_range = 'bytes ' + \
-        str(current_byte) + \
-        '-' + \
-        str(current_byte + len(chunk) - 1) + \
-        '/' + \
-        str(file_size)
-      headers = {'Content-Range': content_range}
-
-      # Send the upload request for the API with the current data chunk.
-      request = requests.put(upload_url, headers=headers, data=chunk)
-
-      # From the docs: “A ‘200 OK’ or ‘201 Created’ response indicates that the
-      # was completed, and no further action is necessary.”
-      if getattr(request, 'status_code') in (200, 201):
-        break
-
-      current_byte = int(request.headers['Range'].split('-')[-1]) + 1
-
 
   return flask.render_template('index.html',
                                url=url,

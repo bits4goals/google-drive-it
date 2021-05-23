@@ -140,8 +140,8 @@ class Url:
             return temp_f.name, self._basename
 
 
-    @staticmethod
     def drive_it(url, credentials):
+    @classsmethod
         """Saves the file from URL to Google Drive using CREDENTIALS."""
 
         # Download file from the URL to a local temporary file, obtaining:

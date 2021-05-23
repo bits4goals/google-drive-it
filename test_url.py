@@ -337,21 +337,6 @@ class TestDownload(unittest.TestCase):
 class TestChunk(unittest.TestCase):
     """Correctly chunk file."""
 
-    def setUp(self):
-        """Create test object and file."""
-
-        self.f = random_temp_file()
-
-        self.url_obj = urlm.Url(random_string())
-        self.url_obj._responseurl = random_string()
-
-
-    def tearDown(self):
-        """Remove the temporary test file."""
-
-        os.remove(self.f)
-
-
     def test_chunk(self):
         """Copy file per chunks and test for equality."""
 

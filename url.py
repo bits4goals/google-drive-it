@@ -155,11 +155,6 @@ class Url:
         except RuntimeError as e:
             error = str(e)
 
-        # Instantiate the object with the OAuth credentials that will be used to
-        # obtain upload access to the Google Drive.
-        credentials = google.oauth2.credentials.\
-            Credentials(**flask.session['credentials'])
-
         # The file will be uploaded via a POST request.
         # First, the initial request will be sent with the OAuth oauth_token.
         # If the initial request succeeds, the API will return the URL to be used

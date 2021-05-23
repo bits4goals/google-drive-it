@@ -41,7 +41,7 @@ def builtin_exceptions():
 
 
 def random_temp_file():
-    """Create a temporary file with random contents and return its path."""
+    """Create a temporary file with random binary content.  Return its path."""
 
     with tempfile.NamedTemporaryFile(delete=False) as f:
         f.write(os.urandom(TEMP_FILE_SIZE))

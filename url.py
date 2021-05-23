@@ -141,8 +141,8 @@ class Url:
 
 
     @classsmethod
-    def drive_it(cls, url, credentials):
-        """Saves the file from URL to Google Drive using CREDENTIALS."""
+    def drive_it(cls, url, oauth_token):
+        """Saves the file from URL to Google Drive using OAUTH_TOKEN."""
 
         # Download file from the URL to a local temporary file, obtaining:
         # tmp_filename:    complete path to the downloaded file (random name,
@@ -161,11 +161,11 @@ class Url:
             Credentials(**flask.session['credentials'])
 
         # The file will be uploaded via a POST request.
-        # First, the initial request will be sent with the OAuth credentials.
+        # First, the initial request will be sent with the OAuth oauth_token.
         # If the initial request succeeds, the API will return the URL to be used
         # for the upload.
         # Here the configuration for the initial request is prepared.
-        headers = {'Authorization': 'Bearer ' + credentials.token,
+        headers = {'Authorization': 'Bearer ' + oauth_token,
                              'Content-Type': 'application/json'}
         params = {'name': os.path.basename(file_path)}
 

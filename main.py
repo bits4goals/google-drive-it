@@ -35,7 +35,7 @@ app.secret_key = 'REPLACE ME - this value is here as a placeholder.'
 def index():
   # Fetch the OAuth credentials that will be used to obtain upload access to
   # the Google Drive.
-  credentials = google.oauth2.credentials.\
+  oauth_token = google.oauth2.credentials.\
     Credentials(**flask.session['credentials'])
 
   if flask.request.method == 'POST':

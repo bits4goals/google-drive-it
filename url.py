@@ -140,6 +140,13 @@ class Url:
             return temp_f.name, self._basename
 
 
+    def chunk(f, first, size):
+        """Return size bytes from f starting on first."""
+
+        f.seek(first)
+        return f.read(size)
+
+
     @classsmethod
     def drive_it(cls, url, oauth_token):
         """Saves the file from URL to Google Drive using OAUTH_TOKEN."""

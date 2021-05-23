@@ -144,11 +144,11 @@ class Url:
     def drive_it(url, credentials):
         """Saves the file from URL to Google Drive using CREDENTIALS."""
 
-        # Download file from the URL to a local temporary file.
-        # tmp_filename: complete path to the downloaded file (random name,
-        #               without extension)
-        # remote_basename: filename with extension of the downloaded file as it was
-        #                  called on the remote server from which it was
+        # Download file from the URL to a local temporary file, obtaining:
+        # tmp_filename:    complete path to the downloaded file (random name,
+        #                  without extension)
+        # remote_basename: filename with extension of the downloaded file as it
+        #                  was called on the remote server from which it was
         #                  downloaded.
         if flask.request.method == 'POST':
             try:

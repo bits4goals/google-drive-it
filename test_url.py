@@ -8,7 +8,7 @@ import itertools
 import logging
 import os
 import os.path
-import tempfile
+from tempfile import NamedTemporaryFile, gettempdir
 import filecmp
 import urllib
 
@@ -43,7 +43,7 @@ def builtin_exceptions():
 def random_temp_file():
     """Create a temporary file with random binary content.  Return its path."""
 
-    with tempfile.NamedTemporaryFile(delete=False) as f:
+    with NamedTemporaryFile(delete=False) as f:
         f.write(os.urandom(TEMP_FILE_SIZE))
 
     return f.name
@@ -291,7 +291,7 @@ class TestDownload(unittest.TestCase):
                     f_downloaded, f__basename = self.url_obj.download()
 
         # Check if it was saved in the temporary directory.
-        self.assertEqual(os.path.dirname(f_downloaded), tempfile.gettempdir())
+        self.assertEqual(os.path.dirname(f_downloaded), gettempdir())
 
         # Check the integrity of the dowloaded file.
         self.assertTrue(filecmp.cmp(f_downloaded, self.f_remote))

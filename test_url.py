@@ -350,12 +350,12 @@ class TestChunk(unittest.TestCase):
                 # copied.
                 first = 0
                 # Get the file size in bytes.
-                size = os.fstat(original.fileno()).st_size
                 # Set the chunk size.
+                file_size = os.fstat(original.fileno()).st_size
                 # TODO: really?
                 chunk_size = 256
-                while first < size:
                     chunk = urlm.Url.chunk(original, first, chunk_size)
+                while first < file_size:
                     copy.write(chunk)
                     first += chunk_size
 

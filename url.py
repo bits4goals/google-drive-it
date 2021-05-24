@@ -170,7 +170,7 @@ class Url:
         if getattr(request, 'status_code') == 200:
             upload_url = request.headers['Location']
         else:
-            upload_url = None
+            raise RuntimeError('Problems obtaining upload URL from API')
 
         return upload_url
 
@@ -190,7 +190,10 @@ class Url:
         except RuntimeError as e:
             error = str(e)
 
-        upload_url = request.headers['Location']
+        try:
+            upload_url = request.headers['Location']
+        except RuntimeError as e:
+            error = str(e)
 
         # The upload will be done with multiple HTTP requests.
         with open(file_path, 'rb') as f:

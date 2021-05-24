@@ -356,7 +356,7 @@ class Test_Upload(unittest.TestCase):
 
             # Create a test file to be uploaded.
             with open(random_temp_file(), mode='rb') as original,\
-                 NamedTemporaryFile(mode=wb, delete=False) as uploaded:
+                 NamedTemporaryFile(mode='wb', delete=False) as uploaded:
 
                 # Prepare the test object.
                 url_obj._filename = original.name

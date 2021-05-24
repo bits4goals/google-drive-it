@@ -12,6 +12,10 @@ import sys
 
 error_msg = 'Error: {}'
 
+# The documentation suggests using a multiple of 256 kB for the
+# multipart upload.  The default here will be 512 kB.
+# https://developers.google.com/drive/api/v3/manage-uploads#uploading
+DEFAULT_CHUNK_SIZE = 2 * 256 * 1024
 
 class Url:
     """URL download and remote filename retrieval."""

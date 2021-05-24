@@ -340,22 +340,6 @@ class TestChunk(unittest.TestCase):
     def test_chunk(self):
         """Copy file per chunks and test for equality."""
 
-        # create a test file
-        orig_name = 'test.bin'
-        copy_name = 'test-copy.bin'
-
-        f = open(orig_name, 'wb')
-        f.write(b'0123456789')
-        f.close()
-
-        # copy the test file in one go
-        original = open(orig_name, 'rb')
-        copy = open(copy_name, 'wb')
-        copy.write(original.read())
-
-        # close files
-        original.close()
-        copy.close()
 
 
 if __name__ == '__main__':

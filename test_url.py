@@ -356,15 +356,16 @@ class TestChunk(unittest.TestCase):
                 first = 0
                 # Get the total file size in bytes.
                 file_size = os.fstat(original.fileno()).st_size
-                # Set the chunk size to be used.
-                # TODO: really?
-                chunk_size = 256
-                # Copy the file in chunks, update the value of the
-                # next first byte to be copied.
-                while first < file_size:
-                    chunk = get_chunk(original, first, chunk_size)
-                    copy.write(chunk)
-                    first += chunk_size
+                # Test with different chunk sizes.
+                for chunk_size in [1, 2, 3, 5, 7, 11, 256]:
+                    with self.subTest(chunk_size=chunk_size):
+                        # Copy the file in chunks, update the value
+                        # of the next first byte to be copied.
+                        while first < file_size:
+                            chunk = get_chunk(original, first,
+                                              chunk_size)
+                            copy.write(chunk)
+                            first += chunk_size
 
         # check if copy was successful
         self.assertTrue(filecmp.cmp(copy.name, original_fname))

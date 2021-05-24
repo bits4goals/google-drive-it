@@ -340,7 +340,6 @@ class TestChunk(unittest.TestCase):
     def test_chunk(self):
         """Copy file per chunks and test for equality."""
 
-        import url as urlm
 
         # Create the test file whose data will be copied.
         orig_filename = random_temp_file()

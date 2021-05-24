@@ -81,7 +81,7 @@ class TestUrlInit(unittest.TestCase):
         """No error when instantiated with string."""
 
         try:
-            urlm.Url(str())
+            urlm.Url(str(), str())
         except TypeError:
             self.fail('Raised TypeError when instantiated with string')
 

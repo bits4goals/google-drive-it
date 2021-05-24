@@ -202,9 +202,8 @@ class Url:
 
         # Download file from the URL to a local temporary file,
         # obtaining:
-        #
-        # filename: path to the downloaded file;
-        # save_as: original name of the file on the remote server.
+        # - filename: path to the downloaded file;
+        # - save_as: original name of the file on the remote server.
         try:
             filename, save_as = self.download()
             _upload(filename, token)

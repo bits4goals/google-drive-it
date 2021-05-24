@@ -223,9 +223,9 @@ class Url:
             upload_url = _get_upload_url(token)
 
             # It will be done multiple HTTP requests.
-            f = open(filename, 'rb')
+            f = open(self.filename, 'rb')
             first_byte = 0
-            file_size = os.path.getsize(filename)
+            file_size = os.path.getsize(self.filename)
             while first_byte < file_size:
                 chunk = get_chunk(f, first_byte)
 

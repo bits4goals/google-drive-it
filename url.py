@@ -162,8 +162,8 @@ class Url:
     def get_chunk(f, first_byte, chunk_size=DEFAULT_CHUNK_SIZE):
         """Return contiguous bytes from a file."""
 
-        f.seek(first)
-        return f.read(size)
+        f.seek(first_byte)
+        return f.read(chunk_size)
 
 
     def _get_upload_url(self, filename, token):

@@ -162,6 +162,7 @@ class Url:
 
     def _get_upload_url(self, filename, oauth_token):
         """Fetch POST address from API."""
+
         # The file will be uploaded via a POST request.
         # First, the initial request will be sent with the OAuth oauth_token.
         # If the initial request succeeds, the API will return the URL to be used

@@ -359,6 +359,8 @@ class TestChunk(unittest.TestCase):
                 # Set the chunk size to be used.
                 # TODO: really?
                 chunk_size = 256
+                # Copy the file in chunks, update the value of the
+                # next first byte to be copied.
                 while first < file_size:
                     chunk = get_chunk(original, first, chunk_size)
                     copy.write(chunk)

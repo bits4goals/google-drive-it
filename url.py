@@ -30,6 +30,7 @@ class Url:
                 raise TypeError('{} must be a string'.format(param))
 
         self.url = url
+        self.token = token
 
 
     @property

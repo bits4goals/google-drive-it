@@ -219,7 +219,7 @@ class Url:
         with open(filename, 'rb') as f:
             first_byte = 0
             file_size = os.path.getsize(filename)
-            for chunk in get_chunks(f):
+            while first_byte < file_size:
 
                 # Send the data chunk upload request.
                 request = requests.put(upload_url, headers=headers, data=chunk)

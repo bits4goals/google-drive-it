@@ -159,8 +159,8 @@ class Url:
 
 
     @staticmethod
-    def get_chunk(f, first, size):
         """Return size bytes from f starting on first."""
+    def get_chunk(f, first_byte, chunk_size=DEFAULT_CHUNK_SIZE):
 
         f.seek(first)
         return f.read(size)

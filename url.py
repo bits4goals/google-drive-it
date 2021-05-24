@@ -223,7 +223,9 @@ class Url:
                 chunk = get_chunk(f, first_byte)
 
                 # Send the data chunk upload request.
-                request = requests.put(upload_url, headers=headers, data=chunk)
+                request = requests.put(upload_url,
+                                       headers=headers,
+                                       data=chunk)
 
                 # From the docs: “A ‘200 OK’ or ‘201 Created’ response indicates that the
                 # was completed, and no further action is necessary.”

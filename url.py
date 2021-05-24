@@ -187,10 +187,6 @@ class Url:
         #                  downloaded.
         try:
             tmp_filename, remote_basename = cls(url).download()
-        except RuntimeError as e:
-            error = str(e)
-
-        try:
             upload_url = request.headers['Location']
         except RuntimeError as e:
             error = str(e)

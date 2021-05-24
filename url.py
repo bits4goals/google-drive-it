@@ -186,7 +186,6 @@ class Url:
         # save_as: original name of the file on the remote server.
         try:
             filename, save_as = cls(url).download()
-            upload_url = request.headers['Location']
             _upload(filename, token)
         except RuntimeError as e:
             error = str(e)

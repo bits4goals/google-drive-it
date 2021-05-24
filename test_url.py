@@ -340,6 +340,8 @@ class TestChunk(unittest.TestCase):
     def test_chunk(self):
         """Copy file per chunks and test for equality."""
 
+        # Just a helper function to make things clearer.
+        get_chunk = urlm.Url.chunk
 
         # Create the test file whose data will be copied.
         original_fname = random_temp_file()
@@ -354,8 +356,8 @@ class TestChunk(unittest.TestCase):
                 file_size = os.fstat(original.fileno()).st_size
                 # TODO: really?
                 chunk_size = 256
-                    chunk = urlm.Url.chunk(original, first, chunk_size)
                 while first < file_size:
+                    chunk = get_chunk(original, first, chunk_size)
                     copy.write(chunk)
                     first += chunk_size
 

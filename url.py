@@ -148,7 +148,7 @@ class Url:
         return f.read(size)
 
 
-    def _get_upload_url(self, oauth_token, file_path):
+    def _get_upload_url(self, filename, oauth_token):
         """Fetch POST address from API."""
         # The file will be uploaded via a POST request.
         # First, the initial request will be sent with the OAuth oauth_token.
@@ -157,7 +157,7 @@ class Url:
         # Here the configuration for the initial request is prepared.
         headers = {'Authorization': 'Bearer ' + oauth_token,
                              'Content-Type': 'application/json'}
-        params = {'name': os.path.basename(file_path)}
+        params = {'name': os.path.basename(filename)}
 
         # Send the initial request, obtaining:
         # status code: “200 OK” when it succeeds

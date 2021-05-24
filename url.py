@@ -194,7 +194,8 @@ class Url:
         return upload_url
 
 
-    def _get_upload_headers(first_byte, chunk_size, file_size):
+    def _get_upload_headers(first_byte, file_size,
+                            chunk_size=DEFAULT_CHUNK_SIZE):
         """Prepare the string for the POST request's headers."""
 
         content_range = 'bytes ' + \

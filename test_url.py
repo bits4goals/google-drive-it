@@ -343,6 +343,9 @@ class Test_Upload(unittest.TestCase):
     def test__upload(self):
         """Does it."""
 
+        # Create a test object.
+        url_obj = urlm.Url(random_string(), random_string())
+
         # Patch a mock to intercept the uploaded chunks.
         with patch('requests.put') as put_mock,\
              patch('url.Url._get_upload_url') as _get_upl_url_mock:
@@ -352,8 +355,22 @@ class Test_Upload(unittest.TestCase):
             _get_upl_url_mock.return_value = random_string()
 
             # Create a test file to be uploaded.
-            original = open(random_temp_file(), mode='rb')
+            with open(random_temp_file(), mode='rb') as original,\
+                 NamedTemporaryFile(mode=wb, delete=False) as uploaded:
 
+                # Call the upload method.
+                url_obj._upload()
+
+            # Construct a new file with the chunks of data received
+            # by the upload method.
+            uploaded = NamedTemporaryFile(mode='wb', delete=False)
+            for call in put_mock.call_args_list:
+                chunk = call.kwargs['data']
+                uploaded.write(chunk)
+
+            original.close(), uploaded.close()
+        # Check if the constructed file has the same contents as the
+        # original file.
 
 
 class TestGet_Chunk(unittest.TestCase):

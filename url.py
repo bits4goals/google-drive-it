@@ -207,6 +207,13 @@ class Url:
         return {'Content-Range': content_range}
 
 
+    @staticmethod
+    def get_last_uploaded_byte(request):
+        """Return last uploade byte.."""
+
+        return int(request.headers['Range'].split('-')[-1])
+
+
     def _upload(self, filename, token):
         """Upload the file to Google Drive using the OAuth token."""
 

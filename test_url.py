@@ -91,7 +91,7 @@ class TestUrlInit(unittest.TestCase):
 
         for url in urls_for_test():
             with self.subTest(url=url):
-                self.assertEqual(url, urlm.Url(url).url)
+                self.assertEqual(url, urlm.Url(url, str()).url)
 
 
 class TestAttr_responseurl(unittest.TestCase):
@@ -101,13 +101,13 @@ class TestAttr_responseurl(unittest.TestCase):
         """Raises error if trying to get _responseurl before setting it."""
 
         with self.assertRaises(RuntimeError):
-            urlm.Url('')._responseurl
+            urlm.Url('', str())._responseurl
 
 
     def test__responseurl_get(self):
         """‘get’ works properly for ‘_responseurl’."""
 
-        url_obj = urlm.Url('')
+        url_obj = urlm.Url('', str())
         for url in urls_for_test():
             with self.subTest(url=url):
                 url_obj._responseurl = url
@@ -124,7 +124,7 @@ class TestAttr_urlpath(unittest.TestCase):
 
         with unittest.mock.patch('urllib.parse.urlparse') as urlparse_mock:
             # Get a test Url instance ready.
-            url_obj = urlm.Url(random_string())
+            url_obj = urlm.Url(random_string(), str())
 
             # Using another random string for the attribute ‘_responseurl’ to
             # have an independent test that the program sets and gets it
@@ -159,7 +159,7 @@ class TestAttr_urlpath(unittest.TestCase):
 
         with unittest.mock.patch('urllib.parse.urlparse') as urlparse_mock:
             # Create a test object.
-            url_obj = urlm.Url(random_string())
+            url_obj = urlm.Url(random_string(), str())
             url_obj._responseurl = random_string()
 
             # Make the mocked method raises the proper error when called.
@@ -199,7 +199,7 @@ class TestAtrr_basename(unittest.TestCase):
     def setUp(self):
         """Prepare an object for test"""
 
-        self.url_obj = urlm.Url(random_string())
+        self.url_obj = urlm.Url(random_string(), str())
         self.url_obj._responseurl = random_string()
 
 
@@ -255,7 +255,7 @@ class TestDownload(unittest.TestCase):
 
         self.f_remote = random_temp_file()
 
-        self.url_obj = urlm.Url(random_string())
+        self.url_obj = urlm.Url(random_string(), str())
         self.url_obj._responseurl = random_string()
 
 

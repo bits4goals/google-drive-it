@@ -25,8 +25,9 @@ class Url:
     def __init__(self, url, token):
         """Use URL and TOKEN for the new instantiated object."""
 
-        if type(url) is not str:
-            raise TypeError('URL must be a string')
+        for param, name in [(url, 'URL', token, 'Token')]:
+            if type(param) is not str:
+                raise TypeError('{} must be a string'.format(param))
 
         self.url = url
 

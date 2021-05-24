@@ -148,7 +148,7 @@ class Url:
         return f.read(size)
 
 
-    def _get_upload_url(self):
+    def _get_upload_url(self, oauth_token, file_path):
         """Fetch POST address from API."""
         # The file will be uploaded via a POST request.
         # First, the initial request will be sent with the OAuth oauth_token.

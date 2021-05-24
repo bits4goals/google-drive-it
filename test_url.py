@@ -64,7 +64,7 @@ def urls_for_test():
 class TestUrlInit(unittest.TestCase):
     """Url instantiation."""
 
-    def test_exception_if_url_not_string(self):
+    def test_exception_if_not_string(self):
         """Error when instantiated with something other than string."""
 
         for typer in (int, float, tuple, list, set, dict):

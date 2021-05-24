@@ -345,7 +345,7 @@ class TestChunk(unittest.TestCase):
         original_fname = random_temp_file()
         with open(original_fname, 'rb') as original:
             # Create an empty test file to receive the data.
-            with tempfile.NamedTemporaryFile() as copy:
+            with NamedTemporaryFile('wb', delete=False) as copy:
                 # Initilize the position of the first byte to be
                 # copied.
                 first = 0

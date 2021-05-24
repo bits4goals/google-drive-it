@@ -120,6 +120,7 @@ class Url:
             with urllib.request.urlopen(self.url) as response:
                 with tempfile.NamedTemporaryFile(delete=False) as temp_f:
                     shutil.copyfileobj(response, temp_f)
+                    self._filename = temp_f.name
 
                 # Set property in the appropriate context, while we
                 # still have access to the data.
@@ -137,7 +138,7 @@ class Url:
             log.error(msg)
             raise
         else:
-            return temp_f.name, self._basename
+            return self._filename, self._basename
 
 
     @staticmethod

@@ -22,8 +22,8 @@ class Url:
     _filename = None
 
 
-    def __init__(self, url):
-        """Use URL for the new instantiated object."""
+    def __init__(self, url, token):
+        """Use URL and TOKEN for the new instantiated object."""
 
         if type(url) is not str:
             raise TypeError('URL must be a string')

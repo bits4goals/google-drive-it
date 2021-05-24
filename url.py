@@ -193,7 +193,7 @@ class Url:
 
         # The upload will be done with multiple HTTP requests.
         with open(file_path, 'rb') as f:
-            # The file will be upload in chunks.
+            # The file will be uploaded in chunks.
             # First, determine the total size for the stop condition.
             file_size = str(os.path.getsize(file_path))
             current_byte = 0

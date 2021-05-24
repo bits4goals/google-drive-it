@@ -190,6 +190,19 @@ class Url:
         return upload_url
 
 
+    def _get_upload_headers(first_byte, chunk_size, file_size):
+        """Prepare the string for the POST request's headers."""
+
+        content_range = 'bytes ' + \
+            str(first_byte) + \
+            '-' + \
+            str(first_byte + chunk_size - 1) + \
+            '/' + \
+            str(file_size)
+
+        return {'Content-Range': content_range}
+
+
     def _upload(self, filename, token):
         """Upload the file to Google Drive using the OAuth token."""
 
@@ -209,13 +222,6 @@ class Url:
                 # the first and last bytes relative to the entire
                 # file.  This is so it knows what has to be uploaded
                 # in this iteration.
-                content_range = 'bytes ' + \
-                    str(current_byte) + \
-                    '-' + \
-                    str(current_byte + len(chunk) - 1) + \
-                    '/' + \
-                    str(file_size)
-                headers = {'Content-Range': content_range}
 
                 # Send the upload request for the API with the current data chunk.
                 request = requests.put(upload_url, headers=headers, data=chunk)

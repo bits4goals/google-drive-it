@@ -222,7 +222,7 @@ class Url:
         """Upload the file to Google Drive using the OAuth token."""
 
         try:
-            upload_url = _get_upload_url()
+            upload_url = self._get_upload_url()
 
             # It will be done multiple HTTP requests.
             f = open(self.filename, 'rb')

@@ -8,6 +8,7 @@ import tempfile
 import shutil
 import logging as log
 import sys
+import requests
 
 
 error_msg = 'Error: {}'

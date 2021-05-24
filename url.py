@@ -198,9 +198,10 @@ class Url:
             file_size = str(os.path.getsize(file_path))
             current_byte = 0
             for chunk in get_chunks(f):
-                # Determine, for the current chunk, the positions of the first and last
-                # bytes relative to the entire file.    This is so it knows what has to be
-                # uploaded in this iteration.
+                # Determine, for the current chunk, the positions of
+                # the first and last bytes relative to the entire
+                # file.  This is so it knows what has to be uploaded
+                # in this iteration.
                 content_range = 'bytes ' + \
                     str(current_byte) + \
                     '-' + \

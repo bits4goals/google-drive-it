@@ -340,6 +340,30 @@ class TestChunk(unittest.TestCase):
     def test_chunk(self):
         """Copy file per chunks and test for equality."""
 
+        import url as urlm
+
+        # Create the test file whose data will be copied.
+        orig_filename = random_temp_file()
+        with open(orig_filename, 'rb') as original:
+            # Create an empty test file to receive the data.
+            with tempfile.NamedTemporaryFile() as copy:
+                # Initilize the position of the first byte to be
+                # copied.
+                first = 0
+                # Get the file size in bytes.
+                size = os.fstat(original.fileno()).st_size
+                # Set the chunk size.
+                # TODO: really?
+                chunk_size = 256
+                while first < size:
+                    chunk = urlm.Url.chunk(original, first, chunk_size)
+                    copy.write(chunk)
+                    first += chunk_size
+
+                # check if copy was successful
+                self.assertTrue(filecmp.cmp(copy.name, orig_filename))
+
+        os.remove(copy_filename)
 
 
 if __name__ == '__main__':

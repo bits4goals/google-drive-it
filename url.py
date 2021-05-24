@@ -167,7 +167,7 @@ class Url:
         return f.read(chunk_size)
 
 
-    def _get_upload_url(self, token):
+    def _get_upload_url(self):
         """Fetch POST address from API."""
 
         # The file will be uploaded via a POST request.
@@ -175,7 +175,7 @@ class Url:
         # If the initial request succeeds, the API will return the URL to be used
         # for the upload.
         # Here the configuration for the initial request is prepared.
-        headers = {'Authorization': 'Bearer ' + token,
+        headers = {'Authorization': 'Bearer ' + self.token,
                              'Content-Type': 'application/json'}
         params = {'name': os.path.basename(self.filename)}
 
@@ -258,7 +258,7 @@ class Url:
 
 
     def drive_it(self, url, token):
-        """Saves the file from URL to Google Drive using TOKEN."""
+        """Save the file from URL to Google Drive."""
 
         try:
             self.download()

@@ -187,6 +187,15 @@ class Url:
         return upload_url
 
 
+    def _upload(self, filename, token):
+        """Upload the file to Google Drive using the OAuth token."""
+
+        try:
+            upload_url = _get_upload_url(filename, token)
+        except RuntimeError:
+            raise
+
+
     def drive_it(self, cls, url, token):
         """Saves the file from URL to Google Drive using TOKEN."""
 

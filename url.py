@@ -222,7 +222,7 @@ class Url:
         except RuntimeError:
             raise
 
-        # The upload will be done with multiple HTTP requests.
+        # It will be done multiple HTTP requests.
         with open(filename, 'rb') as f:
             first_byte = 0
             file_size = os.path.getsize(filename)

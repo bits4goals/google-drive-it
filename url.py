@@ -19,6 +19,7 @@ class Url:
     __responseurl = None
     __urlpath = None
     __basename = None
+    _filename = None
 
 
     def __init__(self, url):
@@ -105,6 +106,16 @@ class Url:
                 raise
 
         return self.__basename
+
+
+    @property
+    def filename(self):
+        """Local name of the downloaded file."""
+
+        if self._filename is None:
+            raise RuntimeError('File name is not set')
+
+        return self._filename
 
 
     def download(self):

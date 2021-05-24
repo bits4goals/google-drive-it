@@ -335,14 +335,14 @@ class TestDownload(unittest.TestCase):
                         self.url_obj.download()
 
 
-class TestChunk(unittest.TestCase):
+class TestGet_Chunk(unittest.TestCase):
     """Correctly chunk file."""
 
-    def test_chunk(self):
+    def test_get_chunk(self):
         """Copy file per chunks and test for equality."""
 
         # Just a helper function to make things clearer.
-        get_chunk = urlm.Url.chunk
+        get_chunk = urlm.Url.get_chunk
 
         # Create the test file whose data will be copied.
         original_fname = random_temp_file()

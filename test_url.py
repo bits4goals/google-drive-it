@@ -12,6 +12,7 @@ import os.path
 from tempfile import NamedTemporaryFile, gettempdir
 import filecmp
 import urllib
+import requests
 
 
 RANDOM_STRING_LEN=64

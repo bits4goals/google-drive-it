@@ -163,24 +163,7 @@ class Url:
         except RuntimeError as e:
             error = str(e)
 
-        # The file will be uploaded via a POST request.
-        # First, the initial request will be sent with the OAuth oauth_token.
-        # If the initial request succeeds, the API will return the URL to be used
-        # for the upload.
-        # Here the configuration for the initial request is prepared.
-        headers = {'Authorization': 'Bearer ' + oauth_token,
-                             'Content-Type': 'application/json'}
-        params = {'name': os.path.basename(file_path)}
-
-        # Send the initial request, obtaining:
-        # status code: “200 OK” when it succeeds
-        # location: when it succeeds, this is the URL to be used for the upload.
-        request = requests.post(
-            'https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable',
-            headers=headers,
-            data=json.dumps(params))
-        if getattr(request, 'status_code') == 200:
-            upload_url = request.headers['Location']
+        upload_url = request.headers['Location']
 
         # The upload will be done with multiple HTTP requests.
         with open(file_path, 'rb') as f:

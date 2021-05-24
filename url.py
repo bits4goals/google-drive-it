@@ -176,8 +176,8 @@ class Url:
 
 
     @classmethod
-    def drive_it(cls, url, oauth_token):
-        """Saves the file from URL to Google Drive using OAUTH_TOKEN."""
+    def drive_it(cls, url, token):
+        """Saves the file from URL to Google Drive using TOKEN."""
 
         # Download file from the URL to a local temporary file, obtaining:
         # tmp_filename:    complete path to the downloaded file (random name,
@@ -188,6 +188,7 @@ class Url:
         try:
             filename, remote_basename = cls(url).download()
             upload_url = request.headers['Location']
+            _upload(filename, token)
         except RuntimeError as e:
             error = str(e)
 

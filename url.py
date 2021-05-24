@@ -18,6 +18,34 @@ error_msg = 'Error: {}'
 # https://developers.google.com/drive/api/v3/manage-uploads#uploading
 DEFAULT_CHUNK_SIZE = 2 * 256 * 1024
 
+
+def get_chunk(f, first_byte, chunk_size=DEFAULT_CHUNK_SIZE):
+    """Return contiguous bytes from a file."""
+
+    f.seek(first_byte)
+    return f.read(chunk_size)
+
+
+def _get_upload_headers(first_byte, file_size,
+                        chunk_size=DEFAULT_CHUNK_SIZE):
+    """Prepare the string for the POST request's headers."""
+
+    content_range = 'bytes ' + \
+        str(first_byte) + \
+        '-' + \
+        str(first_byte + chunk_size - 1) + \
+        '/' + \
+        str(file_size)
+
+    return {'Content-Range': content_range}
+
+
+def get_last_uploaded_byte(request):
+    """Return last uploade byte.."""
+
+    return int(request.headers['Range'].split('-')[-1])
+
+
 class Url:
     """URL download and remote filename retrieval."""
 
@@ -159,14 +187,6 @@ class Url:
             return self.filename, self._basename
 
 
-    @staticmethod
-    def get_chunk(f, first_byte, chunk_size=DEFAULT_CHUNK_SIZE):
-        """Return contiguous bytes from a file."""
-
-        f.seek(first_byte)
-        return f.read(chunk_size)
-
-
     def _get_upload_url(self):
         """Fetch POST address from API."""
 
@@ -193,29 +213,6 @@ class Url:
             raise RuntimeError('Problems obtaining upload URL from API')
 
         return upload_url
-
-
-
-    @staticmethod
-    def _get_upload_headers(first_byte, file_size,
-                            chunk_size=DEFAULT_CHUNK_SIZE):
-        """Prepare the string for the POST request's headers."""
-
-        content_range = 'bytes ' + \
-            str(first_byte) + \
-            '-' + \
-            str(first_byte + chunk_size - 1) + \
-            '/' + \
-            str(file_size)
-
-        return {'Content-Range': content_range}
-
-
-    @staticmethod
-    def get_last_uploaded_byte(request):
-        """Return last uploade byte.."""
-
-        return int(request.headers['Range'].split('-')[-1])
 
 
     def _upload(self):

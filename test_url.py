@@ -383,7 +383,7 @@ class TestGet_Chunk(unittest.TestCase):
         """Copy file per chunks and test for equality."""
 
         # Just a helper function to make things clearer.
-        get_chunk = urlm.Url.get_chunk
+        get_chunk = urlm.get_chunk
 
         # Create the test file whose data will be copied.
         original_fname = random_temp_file()

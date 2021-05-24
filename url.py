@@ -230,6 +230,9 @@ class Url:
             while first_byte < file_size:
                 chunk = get_chunk(f, first_byte)
 
+                # Prepare the headers for the upload request.
+                headers = _get_upload_headers(first_byte, file_size)
+
                 # Send the data chunk upload request.
                 request = requests.put(upload_url,
                                        headers=headers,

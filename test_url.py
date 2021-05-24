@@ -346,7 +346,7 @@ class TestChunk(unittest.TestCase):
         # Create the test file whose data will be copied.
         original_fname = random_temp_file()
         with open(original_fname, 'rb') as original:
-            # Create an empty test file to receive the data.
+            # Create an empty test file to receive the copied data.
             # delete=False is important to prevent it being deleted
             # at the end of the with, so the file comparison for the
             # assertion test will be possible.

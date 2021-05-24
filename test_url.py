@@ -1,5 +1,6 @@
 import unittest
 import unittest.mock
+from unittest.mock import patch
 import url as urlm
 import itertools
 import random
@@ -122,7 +123,7 @@ class TestAttr_urlpath(unittest.TestCase):
 
         It’s assumed that ‘urllib.parse.urlparse’ will be used."""
 
-        with unittest.mock.patch('urllib.parse.urlparse') as urlparse_mock:
+        with patch('urllib.parse.urlparse') as urlparse_mock:
             # Get a test Url instance ready.
             url_obj = urlm.Url(random_string(), str())
 
@@ -157,7 +158,7 @@ class TestAttr_urlpath(unittest.TestCase):
     def test_raises_errors(self):
         """Raises errors as promised in the docstring."""
 
-        with unittest.mock.patch('urllib.parse.urlparse') as urlparse_mock:
+        with patch('urllib.parse.urlparse') as urlparse_mock:
             # Create a test object.
             url_obj = urlm.Url(random_string(), str())
             url_obj._responseurl = random_string()
@@ -209,7 +210,7 @@ class TestAtrr_basename(unittest.TestCase):
         The argument in this case is the attribute ‘_urlpath’, and the return
         value should be assigned to the attribute ‘_basename’."""
 
-        with unittest.mock.patch('os.path.basename') as basename_mock:
+        with patch('os.path.basename') as basename_mock:
             # Prepare the mock method’s return value.
             basename_mock.return_value = random_string()
 
@@ -230,7 +231,7 @@ class TestAtrr_basename(unittest.TestCase):
     def test_raises_errors(self):
         """Raises errors as promised in the docstring."""
 
-        with unittest.mock.patch('os.path.basename') as basename_mock:
+        with patch('os.path.basename') as basename_mock:
             # Make the mocked method raises the proper error when called.
             for exception in builtin_exceptions():
                 # Skip trickier Unicode exceptions.
@@ -272,14 +273,14 @@ class TestDownload(unittest.TestCase):
         used to save it after the download."""
 
         with open(self.f_remote, 'w+b') as f:
-            with unittest.mock.patch('urllib.request.urlopen') as urlopen_mock:
+            with patch('urllib.request.urlopen') as urlopen_mock:
                 # Use the local random temporary file to mock a remote file
                 # to be downloaded.
                 urlopen_mock.return_value = f
 
                 # Use a mock for the attribute ‘_basename’ to avoid having to
                 # mock both ‘os.path.basename’ and ‘urllib.parse.urlparse’.
-                with unittest.mock.patch('url.Url._basename',
+                with patch('url.Url._basename',
                                      new_callable=unittest.mock.PropertyMock) \
                                  as _basename_mock:
                     _basename_test = random_string()
@@ -306,7 +307,7 @@ class TestDownload(unittest.TestCase):
     def test_raises_errors(self):
         """Raises exceptions as promised in the docstring"""
 
-        with unittest.mock.patch('urllib.request.urlopen') as urlopen_mock:
+        with patch('urllib.request.urlopen') as urlopen_mock:
             exceptions = list(builtin_exceptions())
             URLError = urllib.error.URLError
             exceptions.append(URLError)

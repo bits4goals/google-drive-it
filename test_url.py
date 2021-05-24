@@ -338,7 +338,10 @@ class TestDownload(unittest.TestCase):
 class Test_Upload(unittest.TestCase):
     """Correctly uploads chunks."""
 
-    pass
+    def test__upload(self):
+        """Does it."""
+
+        pass
 
 
 class TestGet_Chunk(unittest.TestCase):

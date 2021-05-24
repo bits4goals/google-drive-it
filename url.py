@@ -234,8 +234,8 @@ class Url:
                                        headers=headers,
                                        data=chunk)
 
-                # From the docs: “A ‘200 OK’ or ‘201 Created’ response indicates that the
-                # was completed, and no further action is necessary.”
+                # A response with status code of 200 or 201 indicates
+                # that the upload is complete.
                 if getattr(request, 'status_code') in (200, 201):
                     break
 

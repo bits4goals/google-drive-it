@@ -149,7 +149,7 @@ class Url:
             log.error(msg)
             raise
         else:
-            return self._filename, self._basename
+            return self.filename, self._basename
 
 
     @staticmethod

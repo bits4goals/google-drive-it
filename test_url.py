@@ -68,12 +68,13 @@ class TestUrlInit(unittest.TestCase):
         """Error when instantiated with something other than string."""
 
         for typer in (int, float, tuple, list, set, dict):
-            with self.subTest(typer=typer):
-                # Create a dummy object for test by calling each type.
-                # Called without any arguments, ‘typer’ returns an object of
-                # its type.
-                with self.assertRaises(TypeError):
-                    urlm.Url(typer())
+            for args in ((typer, str()), (str(), typer)):
+                with self.subTest(args=args):
+                    # Create a dummy object for test by calling each type.
+                    # Called without any arguments, ‘typer’ returns an object of
+                    # its type.
+                    with self.assertRaises(TypeError):
+                        urlm.Url(**args)
 
 
     def test_no_exception_if_url_string(self):

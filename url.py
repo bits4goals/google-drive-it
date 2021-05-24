@@ -216,11 +216,11 @@ class Url:
         return int(request.headers['Range'].split('-')[-1])
 
 
-    def _upload(self, token):
+    def _upload(self):
         """Upload the file to Google Drive using the OAuth token."""
 
         try:
-            upload_url = _get_upload_url(token)
+            upload_url = _get_upload_url(self.token)
 
             # It will be done multiple HTTP requests.
             f = open(self.filename, 'rb')
@@ -257,7 +257,7 @@ class Url:
                 pass
 
 
-    def drive_it(self, url, token):
+    def drive_it(self):
         """Save the file from URL to Google Drive."""
 
         try:

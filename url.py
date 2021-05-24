@@ -220,36 +220,40 @@ class Url:
 
         try:
             upload_url = _get_upload_url(filename, token)
+
+            # It will be done multiple HTTP requests.
+            f = open(filename, 'rb')
+            first_byte = 0
+            file_size = os.path.getsize(filename)
+            while first_byte < file_size:
+                chunk = get_chunk(f, first_byte)
+
+                # Prepare the headers for the upload request.
+                headers = _get_upload_headers(first_byte, file_size)
+
+                # Send the data chunk upload request.
+                request = requests.put(upload_url,
+                                       headers=headers,
+                                       data=chunk)
+
+                # A response with status code of 200 or 201 indicates
+                # that the upload is complete.
+                if getattr(request, 'status_code') in (200, 201):
+                    break
+
+                # The response will contain the last successfully
+                # uploaded byte.  It may or may not differ from the
+                # last byte of the chunk we just tried to upload.
+                first_byte = get_last_uploaded_byte(request) + 1
         except RuntimeError:
             raise
-
-        # It will be done multiple HTTP requests.
-        f = open(filename, 'rb')
-        first_byte = 0
-        file_size = os.path.getsize(filename)
-        while first_byte < file_size:
-            chunk = get_chunk(f, first_byte)
-
-            # Prepare the headers for the upload request.
-            headers = _get_upload_headers(first_byte, file_size)
-
-            # Send the data chunk upload request.
-            request = requests.put(upload_url,
-                                   headers=headers,
-                                   data=chunk)
-
-            # A response with status code of 200 or 201 indicates
-            # that the upload is complete.
-            if getattr(request, 'status_code') in (200, 201):
+        except:
+            raise
+        finally:
+            try:
                 f.close()
-                break
-
-            # The response will contain the last successfully
-            # uploaded byte.  It may or may not differ from the
-            # last byte of the chunk we just tried to upload.
-            first_byte = get_last_uploaded_byte(request) + 1
-
-        f.close()
+            except:
+                pass
 
 
     def drive_it(self, url, token):

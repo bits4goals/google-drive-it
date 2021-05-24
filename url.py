@@ -219,6 +219,3 @@ class Url:
                     break
 
                 current_byte = int(request.headers['Range'].split('-')[-1]) + 1
-
-
-            pass

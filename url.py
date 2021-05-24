@@ -239,7 +239,7 @@ class Url:
                 if getattr(request, 'status_code') in (200, 201):
                     break
 
-                current_byte = int(request.headers['Range'].split('-')[-1]) + 1
+                first_byte = get_last_uploaded_byte(request) + 1
 
 
     def drive_it(self, url, token):

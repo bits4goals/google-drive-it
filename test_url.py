@@ -369,7 +369,7 @@ class TestChunk(unittest.TestCase):
         # check if copy was successful
         self.assertTrue(filecmp.cmp(copy.name, original_fname))
 
-        os.remove(copy_filename)
+        os.remove(copy.name)
 
 
 if __name__ == '__main__':

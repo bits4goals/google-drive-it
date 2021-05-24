@@ -175,8 +175,7 @@ class Url:
         return upload_url
 
 
-    @classmethod
-    def drive_it(cls, url, token):
+    def drive_it(self, cls, url, token):
         """Saves the file from URL to Google Drive using TOKEN."""
 
         # Download file from the URL to a local temporary file,

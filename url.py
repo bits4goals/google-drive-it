@@ -213,7 +213,7 @@ class Url:
 
         # The upload will be done with multiple HTTP requests.
         with open(filename, 'rb') as f:
-            current_byte = 0
+            first_byte = 0
             file_size = os.path.getsize(filename)
             for chunk in get_chunks(f):
                 # Determine, for the current chunk, the positions of

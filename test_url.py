@@ -354,9 +354,9 @@ class TestChunk(unittest.TestCase):
                 # Initilize the position of the first byte to be
                 # copied.
                 first = 0
-                # Get the file size in bytes.
-                # Set the chunk size.
+                # Get the total file size in bytes.
                 file_size = os.fstat(original.fileno()).st_size
+                # Set the chunk size to be used.
                 # TODO: really?
                 chunk_size = 256
                 while first < file_size:

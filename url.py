@@ -220,10 +220,6 @@ class Url:
             first_byte = 0
             file_size = os.path.getsize(filename)
             for chunk in get_chunks(f):
-                # Determine, for the current chunk, the positions of
-                # the first and last bytes relative to the entire
-                # file.  This is so it knows what has to be uploaded
-                # in this iteration.
 
                 # Send the upload request for the API with the current data chunk.
                 request = requests.put(upload_url, headers=headers, data=chunk)

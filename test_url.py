@@ -335,6 +335,12 @@ class TestDownload(unittest.TestCase):
                         self.url_obj.download()
 
 
+class Test_Upload(unittest.TestCase):
+    """Correctly uploads chunks."""
+
+    pass
+
+
 class TestGet_Chunk(unittest.TestCase):
     """Correctly chunk file."""
 

@@ -239,6 +239,9 @@ class Url:
                 if getattr(request, 'status_code') in (200, 201):
                     break
 
+                # The API will return the last successfully uploaded
+                # byte, which may differ from the last byte of the
+                # chunk we just tried to upload.
                 first_byte = get_last_uploaded_byte(request) + 1
 
 

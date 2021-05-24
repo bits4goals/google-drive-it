@@ -350,6 +350,9 @@ class Test_Upload(unittest.TestCase):
             # it, requests.put, is also being patched.
             _get_upl_url_mock.return_value = random_string()
 
+            # Create a test file to be uploaded.
+            original = open(random_temp_file(), mode='rb')
+
 
 
 class TestGet_Chunk(unittest.TestCase):

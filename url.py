@@ -186,7 +186,7 @@ class Url:
         #                  was called on the remote server from which it was
         #                  downloaded.
         try:
-            tmp_filename, remote_basename = cls(url).download()
+            filename, remote_basename = cls(url).download()
             upload_url = request.headers['Location']
         except RuntimeError as e:
             error = str(e)

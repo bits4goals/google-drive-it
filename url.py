@@ -221,7 +221,7 @@ class Url:
             file_size = os.path.getsize(filename)
             for chunk in get_chunks(f):
 
-                # Send the upload request for the API with the current data chunk.
+                # Send the data chunk upload request.
                 request = requests.put(upload_url, headers=headers, data=chunk)
 
                 # From the docs: “A ‘200 OK’ or ‘201 Created’ response indicates that the

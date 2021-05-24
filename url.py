@@ -207,8 +207,8 @@ class Url:
         # - filename: path to the downloaded file;
         # - save_as: original name of the file on the remote server.
         try:
-            filename, save_as = self.download()
-            _upload(filename, token)
+            self.download()
+            self._upload()
         except RuntimeError as e:
             error = str(e)
 

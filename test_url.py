@@ -366,8 +366,8 @@ class TestChunk(unittest.TestCase):
                     copy.write(chunk)
                     first += chunk_size
 
-                # check if copy was successful
-                self.assertTrue(filecmp.cmp(copy.name, orig_filename))
+        # check if copy was successful
+        self.assertTrue(filecmp.cmp(copy.name, original_fname))
 
         os.remove(copy_filename)
 

@@ -159,7 +159,7 @@ class Url:
         #                  was called on the remote server from which it was
         #                  downloaded.
         try:
-            tmp_filename, remote_basename = cls(request.form['url']).download()
+            tmp_filename, remote_basename = cls(url).download()
         except RuntimeError as e:
             error = str(e)
 

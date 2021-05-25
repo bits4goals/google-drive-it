@@ -363,20 +363,18 @@ class Test_Upload(unittest.TestCase):
         # Create a test object.
         url_obj = urlm.Url(random_string(), random_string())
 
-        # Patch a mock to intercept the uploaded chunks.
-        with patch('requests.put') as put_mock,\
-             patch('url.Url._get_upload_url')\
-                 as _get_upload_url_mock,\
-             patch('url.get_last_uploaded_byte')\
-                 as get_last_uploaded_byte_mock:
-            # Prepare the mocked method.  We won't need a meaningful
-            # return value for it because the method that would use
-            # it, requests.put, is also being patched.
-            _get_upload_url_mock.return_value = random_string()
-
-            # [1, 2, 3, 5, 7, 11, 256]
-            for chunk_size in [1, 128]:
-                with self.subTest(chunk_size=chunk_size):
+        for chunk_size in [1, 2, 3, 5, 7, 11, 256, 2*256*1024]:
+            with self.subTest(chunk_size=chunk_size):
+                # Patch a mock to intercept the uploaded chunks.
+                with patch('requests.put') as put_mock,\
+                     patch('url.Url._get_upload_url')\
+                         as _get_upload_url_mock,\
+                     patch('url.get_last_uploaded_byte')\
+                         as get_last_uploaded_byte_mock:
+                    # Prepare the mocked method.  We won't need a meaningful
+                    # return value for it because the method that would use
+                    # it, requests.put, is also being patched.
+                    _get_upload_url_mock.return_value = random_string()
                     # Create a test file to be uploaded.
                     with open(random_temp_file(), mode='rb') as original,\
                          NamedTemporaryFile(mode='wb', delete=False)\

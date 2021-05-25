@@ -4,6 +4,7 @@
 venv
 client_secrets-desktop.json
 client_secrets-web.json
+token-desktop.json
 __pycache__
 localhost
 TAGS

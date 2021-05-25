@@ -215,7 +215,7 @@ class Url:
         return upload_url
 
 
-    def _upload(self, chunk_size=UPLOAD_CHUNK_SIZE):
+    def _upload(self, upload_chunk_size=UPLOAD_CHUNK_SIZE):
         """Upload the file to Google Drive using the OAuth token."""
 
         try:
@@ -226,7 +226,7 @@ class Url:
             first_byte = 0
             file_size = os.path.getsize(self.filename)
             while first_byte < file_size:
-                chunk = get_chunk(f, first_byte, chunk_size)
+                chunk = get_chunk(f, first_byte, upload_chunk_size)
 
                 # Prepare the headers for the upload request.
                 headers = _get_upload_headers(first_byte, file_size)

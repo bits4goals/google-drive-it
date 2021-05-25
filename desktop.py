@@ -32,3 +32,4 @@ if not credentials or not credentials.valid:
 
 url = urlm.Url('file:///home/rafa/re/eu/profile-picture/avatar.jpg',
                credentials.token)
+filename, basename = url.drive_it()

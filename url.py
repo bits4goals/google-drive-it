@@ -197,7 +197,7 @@ class Url:
         # Here the configuration for the initial request is prepared.
         headers = {'Authorization': 'Bearer ' + self.token,
                              'Content-Type': 'application/json'}
-        params = {'name': os.path.basename(self.filename)}
+        params = {'name': self._basename}
 
         # Send the initial request, obtaining:
         # status code: “200 OK” when it succeeds

@@ -267,3 +267,4 @@ class Url:
             return self.filename, self._basename
         except RuntimeError as e:
             error = str(e)
+            raise

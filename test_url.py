@@ -390,8 +390,6 @@ class Test_Upload(unittest.TestCase):
                 # Call the upload method.
                 url_obj._upload(chunk_size=chunk_size)
 
-            # Construct a new file with the chunks of data received
-            # by the upload method.
             uploaded = NamedTemporaryFile(mode='wb', delete=False)
             for call in put_mock.call_args_list:
                 chunk = call.kwargs['data']

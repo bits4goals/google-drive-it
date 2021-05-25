@@ -340,7 +340,7 @@ class TestDownload(unittest.TestCase):
 class Test_Upload(unittest.TestCase):
     """Correctly uploads chunks."""
 
-    def get_glubmse(file_size, chunk_size):
+    def get_lubmse(file_size, chunk_size):
         """Generate the expected last successfully uploaded bytes."""
 
         l = [0]
@@ -377,7 +377,7 @@ class Test_Upload(unittest.TestCase):
             # consists of a list of byte positions from 0 to
             # file_size - 1.
             get_last_uploaded_byte_mock.side_effect =\
-                get_glubmse(file_size, chunk_size)
+                get_lubmse(file_size, chunk_size)
 
             # Create a test file to be uploaded.
             with open(random_temp_file(), mode='rb') as original,\

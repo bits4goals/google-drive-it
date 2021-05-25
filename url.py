@@ -27,8 +27,7 @@ def get_chunk(f, first_byte, chunk_size=DEFAULT_CHUNK_SIZE):
     return f.read(chunk_size)
 
 
-def _get_upload_headers(first_byte, file_size,
-                        chunk_size=DEFAULT_CHUNK_SIZE):
+def _get_upload_headers(first_byte, file_size, chunk_size):
     """Prepare the string for the POST request's headers."""
 
     content_range = 'bytes ' + \

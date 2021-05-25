@@ -341,10 +341,10 @@ class Test_Upload(unittest.TestCase):
     """Correctly uploads chunks."""
 
     @staticmethod
-    def get_lubmse(file_size, chunk_size):
+    def get_lubmse(file_size, upload_chunk_size):
         """Generate the expected last successfully uploaded bytes."""
 
-        l = list(range(chunk_size - 1, file_size, chunk_size))
+        l = list(range(upload_chunk_size - 1, file_size, upload_chunk_size))
 
         # Make sure the last byte will be present even when it’s not given
         # by range().
@@ -363,8 +363,8 @@ class Test_Upload(unittest.TestCase):
         # Create a test object.
         url_obj = urlm.Url(random_string(), random_string())
 
-        for chunk_size in [1, 2, 3, 5, 7, 11, 256, 2*256*1024]:
-            with self.subTest(chunk_size=chunk_size):
+        for upload_chunk_size in [1, 2, 3, 5, 7, 11, 256, 2*256*1024]:
+            with self.subTest(upload_chunk_size=upload_chunk_size):
                 # Patch a mock to intercept the uploaded chunks.
                 with patch('requests.put') as put_mock,\
                      patch('url.Url._get_upload_url')\
@@ -388,10 +388,10 @@ class Test_Upload(unittest.TestCase):
                         # file_size - 1.
                         file_size = os.path.getsize(original.name)
                         get_last_uploaded_byte_mock.side_effect =\
-                            self.get_lubmse(file_size, chunk_size)
+                            self.get_lubmse(file_size, upload_chunk_size)
 
                         # Call the upload method.
-                        url_obj._upload(chunk_size=chunk_size)
+                        url_obj._upload(upload_chunk_size=upload_chunk_size)
 
                         for call in put_mock.call_args_list:
                             chunk = call.kwargs['data']
@@ -428,15 +428,15 @@ class TestGet_Chunk(unittest.TestCase):
                 # Get the total file size in bytes.
                 file_size = os.fstat(original.fileno()).st_size
                 # Test with different chunk sizes.
-                for chunk_size in [1, 2, 3, 5, 7, 11, 256]:
-                    with self.subTest(chunk_size=chunk_size):
+                for upload_chunk_size in [1, 2, 3, 5, 7, 11, 256]:
+                    with self.subTest(upload_chunk_size=upload_chunk_size):
                         # Copy the file in chunks, update the value
                         # of the next first byte to be copied.
                         while first < file_size:
                             chunk = get_chunk(original, first,
-                                              chunk_size)
+                                              upload_chunk_size)
                             copy.write(chunk)
-                            first += chunk_size
+                            first += upload_chunk_size
 
         # check if copy was successful
         self.assertTrue(filecmp.cmp(copy.name, original_fname))

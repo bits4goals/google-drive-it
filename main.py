@@ -33,6 +33,9 @@ app.secret_key = 'REPLACE ME - this value is here as a placeholder.'
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+  if 'credentials' not in flask.session:
+    return flask.redirect('authorize')
+
   # Fetch the OAuth credentials that will be used to obtain upload access to
   # the Google Drive.
   credentials = google.oauth2.credentials.\

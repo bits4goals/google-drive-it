@@ -38,6 +38,7 @@ def index():
   credentials = google.oauth2.credentials.\
     Credentials(**flask.session['credentials'])
 
+  url, local_filename, remote_basename, error  = None, None, None, None
   if flask.request.method == 'POST':
     try:
       url = urlm.Url(request.form['url'], credentials.token)

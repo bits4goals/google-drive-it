@@ -387,7 +387,7 @@ class Test_Upload(unittest.TestCase):
                 url_obj._filename = original.name
 
                 # Call the upload method.
-                url_obj._upload()
+                url_obj._upload(chunk_size=chunk_size)
 
             # Construct a new file with the chunks of data received
             # by the upload method.

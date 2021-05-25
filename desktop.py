@@ -29,3 +29,5 @@ if not credentials or not credentials.valid:
     # Save the credentials for the next run
     with open(TOKEN_FILE, 'w') as token:
         token.write(credentials.to_json())
+
+url = urlm.Url('file:///home/rafa/re/eu/profile-picture/avatar.jpg', )

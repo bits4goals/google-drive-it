@@ -396,6 +396,7 @@ class Test_Upload(unittest.TestCase):
 
             # Check if the constructed file has the same contents as the
             # original file.
+            self.assertTrue(filecmp.cmp(original.name, uploaded.name))
 
 
 class TestGet_Chunk(unittest.TestCase):

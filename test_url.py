@@ -340,6 +340,7 @@ class TestDownload(unittest.TestCase):
 class Test_Upload(unittest.TestCase):
     """Correctly uploads chunks."""
 
+    @staticmethod
     def get_lubmse(file_size, chunk_size):
         """Generate the expected last successfully uploaded bytes."""
 

@@ -12,4 +12,4 @@ localhost
 
 client_secrets-desktop.json
 client_secrets-web.json
-token-desktop.json
+credentials-desktop.json

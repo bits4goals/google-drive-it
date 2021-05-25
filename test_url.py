@@ -395,6 +395,9 @@ class Test_Upload(unittest.TestCase):
                     # original file.
                     self.assertTrue(filecmp.cmp(original.name, uploaded.name))
 
+                    os.remove(original.name)
+                    os.remove(uploaded.name)
+
 
 class TestGet_Chunk(unittest.TestCase):
     """Correctly chunk file."""

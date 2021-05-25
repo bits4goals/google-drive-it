@@ -394,8 +394,8 @@ class Test_Upload(unittest.TestCase):
                     chunk = call.kwargs['data']
                     uploaded.write(chunk)
 
-        # Check if the constructed file has the same contents as the
-        # original file.
+            # Check if the constructed file has the same contents as the
+            # original file.
 
 
 class TestGet_Chunk(unittest.TestCase):

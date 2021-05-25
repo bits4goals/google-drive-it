@@ -2,7 +2,8 @@
 \#*\#
 .\#*
 venv
-client_secret.json
+client_secrets-desktop.json
+client_secrets-web.json
 __pycache__
 localhost
 TAGS

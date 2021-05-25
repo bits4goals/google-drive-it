@@ -263,5 +263,7 @@ class Url:
         try:
             self.download()
             self._upload()
+
+            return self.filename, self._basename
         except RuntimeError as e:
             error = str(e)

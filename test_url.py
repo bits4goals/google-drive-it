@@ -352,7 +352,7 @@ class Test_Upload(unittest.TestCase):
 
     @unittest.skip('wip')
     def test__upload(self):
-        """Does it."""
+        """Upload method properly receives file chunks."""
 
         # Create a test object.
         url_obj = urlm.Url(random_string(), random_string())

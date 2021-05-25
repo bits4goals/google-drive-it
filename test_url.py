@@ -350,6 +350,7 @@ class Test_Upload(unittest.TestCase):
         return l
 
 
+    @unittest.skip('wip')
     def test__upload(self):
         """Does it."""
 

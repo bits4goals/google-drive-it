@@ -390,12 +390,10 @@ class Test_Upload(unittest.TestCase):
                 # Call the upload method.
                 url_obj._upload(chunk_size=chunk_size)
 
-            uploaded = NamedTemporaryFile(mode='wb', delete=False)
                 for call in put_mock.call_args_list:
                     chunk = call.kwargs['data']
                     uploaded.write(chunk)
 
-            original.close(), uploaded.close()
         # Check if the constructed file has the same contents as the
         # original file.
 

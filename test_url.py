@@ -348,7 +348,8 @@ class Test_Upload(unittest.TestCase):
 
         # Patch a mock to intercept the uploaded chunks.
         with patch('requests.put') as put_mock,\
-             patch('url.Url._get_upload_url') as _get_upload_url_mock:
+             patch('url.Url._get_upload_url')\
+                 as _get_upload_url_mock:
             # Prepare the mocked method.  We won't need a meaningful
             # return value for it because the method that would use
             # it, requests.put, is also being patched.

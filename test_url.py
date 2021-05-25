@@ -372,6 +372,13 @@ class Test_Upload(unittest.TestCase):
             # it, requests.put, is also being patched.
             _get_upload_url_mock.return_value = random_string()
 
+            # Prepare the mocked method that will return the last
+            # successfully uploaded byte for each iteration.  It
+            # consists of a list of byte positions from 0 to
+            # file_size - 1.
+            get_last_uploaded_byte_mock.side_effect =\
+                get_glubmse(file_size, chunk_size)
+
             # Create a test file to be uploaded.
             with open(random_temp_file(), mode='rb') as original,\
                  NamedTemporaryFile(mode='wb', delete=False) as uploaded:

@@ -356,11 +356,6 @@ class Test_Upload(unittest.TestCase):
         # Create a test object.
         url_obj = urlm.Url(random_string(), random_string())
 
-        # Controlling the size of the upload chunk is necessary to
-        # know what values the mocked method that returns the last
-        # successful uploaded byte should return.
-        chunk_size = 128
-
         # Patch a mock to intercept the uploaded chunks.
         with patch('requests.put') as put_mock,\
              patch('url.Url._get_upload_url')\
@@ -372,30 +367,33 @@ class Test_Upload(unittest.TestCase):
             # it, requests.put, is also being patched.
             _get_upload_url_mock.return_value = random_string()
 
-            # Create a test file to be uploaded.
-            with open(random_temp_file(), mode='rb') as original,\
-                 NamedTemporaryFile(mode='wb', delete=False) as uploaded:
-                # Prepare the test object.
-                url_obj._filename = original.name
+            # [1, 2, 3, 5, 7, 11, 256]
+            for chunk_size in [1, 128]:
+                with self.subTest(chunk_size=chunk_size):
+                    # Create a test file to be uploaded.
+                    with open(random_temp_file(), mode='rb') as original,\
+                         NamedTemporaryFile(mode='wb', delete=False) as uploaded:
+                        # Prepare the test object.
+                        url_obj._filename = original.name
 
-                # Prepare the mocked method that will return the last
-                # successfully uploaded byte for each iteration.  It
-                # consists of a list of byte positions from 0 to
-                # file_size - 1.
-                file_size = os.path.getsize(original.name)
-                get_last_uploaded_byte_mock.side_effect =\
-                    self.get_lubmse(file_size, chunk_size)
+                        # Prepare the mocked method that will return the last
+                        # successfully uploaded byte for each iteration.  It
+                        # consists of a list of byte positions from 0 to
+                        # file_size - 1.
+                        file_size = os.path.getsize(original.name)
+                        get_last_uploaded_byte_mock.side_effect =\
+                            self.get_lubmse(file_size, chunk_size)
 
-                # Call the upload method.
-                url_obj._upload(chunk_size=chunk_size)
+                        # Call the upload method.
+                        url_obj._upload(chunk_size=chunk_size)
 
-                for call in put_mock.call_args_list:
-                    chunk = call.kwargs['data']
-                    uploaded.write(chunk)
+                        for call in put_mock.call_args_list:
+                            chunk = call.kwargs['data']
+                            uploaded.write(chunk)
 
-            # Check if the constructed file has the same contents as the
-            # original file.
-            self.assertTrue(filecmp.cmp(original.name, uploaded.name))
+                    # Check if the constructed file has the same contents as the
+                    # original file.
+                    self.assertTrue(filecmp.cmp(original.name, uploaded.name))
 
 
 class TestGet_Chunk(unittest.TestCase):

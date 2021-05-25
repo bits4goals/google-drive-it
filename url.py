@@ -9,6 +9,7 @@ import shutil
 import logging as log
 import sys
 import requests
+import json
 
 
 error_msg = 'Error: {}'

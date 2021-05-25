@@ -346,6 +346,11 @@ class Test_Upload(unittest.TestCase):
         # Create a test object.
         url_obj = urlm.Url(random_string(), random_string())
 
+        # Controlling the size of the upload chunk is necessary to
+        # know what values the mocked method that returns the last
+        # successful uploaded byte should return.
+        chunk_size = 128
+
         # Patch a mock to intercept the uploaded chunks.
         with patch('requests.put') as put_mock,\
              patch('url.Url._get_upload_url')\

@@ -344,8 +344,15 @@ class Test_Upload(unittest.TestCase):
     def get_lubmse(file_size, chunk_size):
         """Generate the expected last successfully uploaded bytes."""
 
-        l = list(range(-1, file_size, chunk_size))
-        l.remove(-1)
+        l = list(range(chunk_size - 1, file_size, chunk_size))
+
+        # Make sure the last byte will be present even when it’s not given
+        # by range().
+        last_item = file_size - 1
+        try:
+            l.index(last_item)
+        except:
+            l.append(last_item)
 
         return l
 

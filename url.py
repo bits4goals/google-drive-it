@@ -17,10 +17,10 @@ error_msg = 'Error: {}'
 # The documentation suggests using a multiple of 256 kB for the
 # multipart upload.  The default here will be 512 kB.
 # https://developers.google.com/drive/api/v3/manage-uploads#uploading
-DEFAULT_CHUNK_SIZE = 2 * 256 * 1024
+UPLOAD_CHUNK_SIZE = 2 * 256 * 1024
 
 
-def get_chunk(f, first_byte, chunk_size=DEFAULT_CHUNK_SIZE):
+def get_chunk(f, first_byte, chunk_size=UPLOAD_CHUNK_SIZE):
     """Return contiguous bytes from a file."""
 
     f.seek(first_byte)
@@ -215,7 +215,7 @@ class Url:
         return upload_url
 
 
-    def _upload(self, chunk_size=DEFAULT_CHUNK_SIZE):
+    def _upload(self, chunk_size=UPLOAD_CHUNK_SIZE):
         """Upload the file to Google Drive using the OAuth token."""
 
         try:

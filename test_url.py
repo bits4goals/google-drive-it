@@ -340,6 +340,16 @@ class TestDownload(unittest.TestCase):
 class Test_Upload(unittest.TestCase):
     """Correctly uploads chunks."""
 
+    def get_glubmse(file_size, chunk_size):
+        """Generate the expected last successfully uploaded bytes."""
+
+        l = [0]
+        l.extend(list(range(-1, file_size, chunk_size)))
+        l.remove(-1)
+
+        return l
+
+
     def test__upload(self):
         """Does it."""
 

@@ -49,10 +49,10 @@ def home():
       error = str(e)
 
   return render_template('index.html',
-                               url=url,
-                               local_filename=local_filename,
-                               remote_basename=remote_basename,
-                               error=error)
+                         url=url,
+                         local_filename=local_filename,
+                         remote_basename=remote_basename,
+                         error=error)
 
 
 @app.route('/signin')

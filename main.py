@@ -74,14 +74,15 @@ def signin():
 
 @app.route('/authorize')
 def authorize():
-  # Create flow instance to manage the OAuth 2.0 Authorization Grant Flow steps.
+  # Create flow instance to manage the OAuth 2.0 Authorization Grant Flow
+  # steps.
   flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
       CLIENT_SECRETS_FILE, scopes=SCOPES)
 
-  # The URI created here must exactly match one of the authorized redirect URIs
-  # for the OAuth 2.0 client, which you configured in the API Console. If this
-  # value doesn't match an authorized URI, you will get a 'redirect_uri_mismatch'
-  # error.
+  # The URI created here must exactly match one of the authorized
+  # redirect URIs for the OAuth 2.0 client, which you configured in
+  # the API Console.If this value doesn't match an authorized URI, you
+  # will get a 'redirect_uri_mismatch' error.
   flow.redirect_uri = url_for('oauth2callback', _external=True)
 
   authorization_url, state = flow.authorization_url(

@@ -55,8 +55,8 @@ def index():
                                error=error)
 
 
-@app.route('/login')
-def login():
+@app.route('/signin')
+def signin():
   if 'credentials' not in session:
     return redirect('authorize')
 
@@ -156,8 +156,8 @@ def upload(url):
   return f'status_code: {status_code}<br>upload_url: {upload_url}'
 
 
-@app.route('/logout')
-def logout():
+@app.route('/signout')
+def signout():
   clear_credentials()
 
   return redirect(url_for('index'))

@@ -1,7 +1,8 @@
 # -*- coding: utf-8 -*-
 
 import os
-from flask import Flask, session, request, redirect, render_template, url_for
+from flask import (Flask, session, request, redirect, render_template,
+                   url_for, flash)
 import requests
 
 import google.oauth2.credentials

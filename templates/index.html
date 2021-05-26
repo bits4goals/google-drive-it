@@ -1,3 +1,18 @@
+
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+<form method="post">
+  <label for="url">Link</label>
+  <input type="url" name="url">
+  <input type="submit" value="Driveet">
+</form>
+{% endblock %}
+
 {% with messages = get_flashed_messages(with_categories=true) %}
   {% if messages %}
     <ul class=flashes>
@@ -7,33 +22,3 @@
     </ul>
   {% endif %}
 {% endwith %}
-
-<table>
-  <tr>
-    URL received: {{url.url}}
-  </tr>
-  <tr>
-    <td>local_filename</td>
-    <td>{{local_filename}}</td>
-  </tr>
-  <tr>
-    <td>remote_basename</td>
-    <td>{{remote_basename}}</td>
-  </tr>
-  <tr>
-    <td>error</td>
-    <td>{{error}}</td>
-  </tr>
-</table>
-
-{% if 'credentials' not in session %}
-    <a href="{{ url_for('signin') }}">Sign in</a>
-{% else %}
-    <a href="{{ url_for('signout') }}">Sign out</a>
-{% endif %}
-
-<form method="post">
-  <label for="url">Link</label>
-  <input type="url" name="url">
-  <input type="submit" value="DriveIt!">
-</form>

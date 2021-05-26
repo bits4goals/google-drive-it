@@ -69,7 +69,7 @@ def signin():
   #              credentials in a persistent database instead.
   session['credentials'] = credentials_to_dict(credentials)
 
-  return redirect('/')
+  return redirect(url_for('home'))
 
 
 @app.route('/authorize')

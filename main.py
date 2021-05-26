@@ -70,7 +70,7 @@ def login():
   #              credentials in a persistent database instead.
   flask.session['credentials'] = credentials_to_dict(credentials)
 
-  return flask.jsonify(**files)
+  return flask.redirect(index)
 
 
 @app.route('/authorize')

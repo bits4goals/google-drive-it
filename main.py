@@ -56,8 +56,8 @@ def index():
                                error=error)
 
 
-@app.route('/test')
-def test_api_request():
+@app.route('/login')
+def login():
   if 'credentials' not in flask.session:
     return flask.redirect('authorize')
 

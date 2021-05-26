@@ -65,11 +65,6 @@ def login():
   credentials = google.oauth2.\
     credentials.Credentials(**flask.session['credentials'])
 
-  drive = googleapiclient.discovery.build(
-      API_SERVICE_NAME, API_VERSION, credentials=credentials)
-
-  files = drive.files().list().execute()
-
   # Save credentials back to session in case access token was refreshed.
   # ACTION ITEM: In a production app, you likely want to save these
   #              credentials in a persistent database instead.

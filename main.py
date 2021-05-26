@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
-import flask
-from flask import request
+from flask import Flask, session, request, redirect, render_template, url_for
 import requests
 
 import google.oauth2.credentials
@@ -24,7 +23,7 @@ SCOPES = ['https://www.googleapis.com/auth/drive.file']
 API_SERVICE_NAME = 'drive'
 API_VERSION = 'v3'
 
-app = flask.Flask(__name__)
+app = Flask(__name__)
 # Note: A secret key is included in the sample so that it works.
 # If you use this code in your application, replace this with a truly secret
 # key. See https://flask.palletsprojects.com/quickstart/#sessions.
@@ -33,23 +32,23 @@ app.secret_key = 'REPLACE ME - this value is here as a placeholder.'
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-  if 'credentials' not in flask.session:
-    return flask.redirect('authorize')
+  if 'credentials' not in session:
+    return redirect('authorize')
 
   # Fetch the OAuth credentials that will be used to obtain upload access to
   # the Google Drive.
   credentials = google.oauth2.credentials.\
-    Credentials(**flask.session['credentials'])
+    Credentials(**session['credentials'])
 
   url, local_filename, remote_basename, error  = None, None, None, None
-  if flask.request.method == 'POST':
+  if request.method == 'POST':
     try:
       url = urlm.Url(request.form['url'], credentials.token)
       local_filename, remote_basename = url.drive_it()
     except RuntimeError as e:
       error = str(e)
 
-  return flask.render_template('index.html',
+  return render_template('index.html',
                                url=url,
                                local_filename=local_filename,
                                remote_basename=remote_basename,
@@ -58,19 +57,19 @@ def index():
 
 @app.route('/login')
 def login():
-  if 'credentials' not in flask.session:
-    return flask.redirect('authorize')
+  if 'credentials' not in session:
+    return redirect('authorize')
 
   # Load credentials from the session.
   credentials = google.oauth2.\
-    credentials.Credentials(**flask.session['credentials'])
+    credentials.Credentials(**session['credentials'])
 
   # Save credentials back to session in case access token was refreshed.
   # ACTION ITEM: In a production app, you likely want to save these
   #              credentials in a persistent database instead.
-  flask.session['credentials'] = credentials_to_dict(credentials)
+  session['credentials'] = credentials_to_dict(credentials)
 
-  return flask.redirect('/')
+  return redirect('/')
 
 
 @app.route('/authorize')
@@ -83,7 +82,7 @@ def authorize():
   # for the OAuth 2.0 client, which you configured in the API Console. If this
   # value doesn't match an authorized URI, you will get a 'redirect_uri_mismatch'
   # error.
-  flow.redirect_uri = flask.url_for('oauth2callback', _external=True)
+  flow.redirect_uri = url_for('oauth2callback', _external=True)
 
   authorization_url, state = flow.authorization_url(
       # Enable offline access so that you can refresh an access token without
@@ -93,42 +92,42 @@ def authorize():
       include_granted_scopes='true')
 
   # Store the state so the callback can verify the auth server response.
-  flask.session['state'] = state
+  session['state'] = state
 
-  return flask.redirect(authorization_url)
+  return redirect(authorization_url)
 
 
 @app.route('/oauth2callback')
 def oauth2callback():
   # Specify the state when creating the flow in the callback so that it can
   # verified in the authorization server response.
-  state = flask.session['state']
+  state = session['state']
 
   flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
       CLIENT_SECRETS_FILE, scopes=SCOPES, state=state)
-  flow.redirect_uri = flask.url_for('oauth2callback', _external=True)
+  flow.redirect_uri = url_for('oauth2callback', _external=True)
 
   # Use the authorization server's response to fetch the OAuth 2.0 tokens.
-  authorization_response = flask.request.url
+  authorization_response = request.url
   flow.fetch_token(authorization_response=authorization_response)
 
   # Store credentials in the session.
   # ACTION ITEM: In a production app, you likely want to save these
   #              credentials in a persistent database instead.
   credentials = flow.credentials
-  flask.session['credentials'] = credentials_to_dict(credentials)
+  session['credentials'] = credentials_to_dict(credentials)
 
-  return flask.redirect(flask.url_for('test_api_request'))
+  return redirect(url_for('index'))
 
 
 @app.route('/revoke')
 def revoke():
-  if 'credentials' not in flask.session:
+  if 'credentials' not in session:
     return ('You need to <a href="/authorize">authorize</a> before ' +
             'testing the code to revoke credentials.')
 
   credentials = google.oauth2.credentials.Credentials(
-    **flask.session['credentials'])
+    **session['credentials'])
 
   revoke = requests.post('https://oauth2.googleapis.com/revoke',
       params={'token': credentials.token},
@@ -159,8 +158,8 @@ def upload(url):
 
 @app.route('/clear')
 def clear_credentials():
-  if 'credentials' in flask.session:
-    del flask.session['credentials']
+  if 'credentials' in session:
+    del session['credentials']
   return ('Credentials have been cleared.<br><br>' +
           print_index_table())
 

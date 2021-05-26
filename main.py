@@ -32,16 +32,16 @@ app.secret_key = 'REPLACE ME - this value is here as a placeholder.'
 
 @app.route('/', methods=['GET', 'POST'])
 def home():
-  if 'credentials' not in session:
-    return redirect('authorize')
-
-  # Fetch the OAuth credentials that will be used to obtain upload access to
-  # the Google Drive.
-  credentials = google.oauth2.credentials.\
-    Credentials(**session['credentials'])
-
   url, local_filename, remote_basename, error  = None, None, None, None
   if request.method == 'POST':
+    if 'credentials' not in session:
+      return redirect('authorize')
+
+    # Fetch the OAuth credentials that will be used to obtain upload access to
+    # the Google Drive.
+    credentials = google.oauth2.credentials.\
+      Credentials(**session['credentials'])
+
     try:
       url = urlm.Url(request.form['url'], credentials.token)
       local_filename, remote_basename = url.drive_it()

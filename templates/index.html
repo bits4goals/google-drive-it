@@ -40,8 +40,11 @@
   </tr>
 </table>
 
-<a href="{{ url_for('signin') }}">Sign in</a>
-<a href="{{ url_for('signout') }}">Sign out</a>
+{% if 'credentials' not in session %}
+    <a href="{{ url_for('signin') }}">Sign in</a>
+{% else %}
+    <a href="{{ url_for('signout') }}">Sign out</a>
+{% endif %}
 
 <form method="post">
   <label for="url">Link</label>

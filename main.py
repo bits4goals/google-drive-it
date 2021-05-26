@@ -156,6 +156,12 @@ def upload(url):
   return f'status_code: {status_code}<br>upload_url: {upload_url}'
 
 
+@app.route('/logout')
+def logout():
+  clear_credentials()
+
+  return redirect(url_for('index'))
+
 def clear_credentials():
   if 'credentials' in session:
     del session['credentials']

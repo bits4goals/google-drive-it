@@ -62,8 +62,8 @@ def login():
     return flask.redirect('authorize')
 
   # Load credentials from the session.
-  credentials = google.oauth2.credentials.Credentials(
-      **flask.session['credentials'])
+  credentials = google.oauth2.\
+    credentials.Credentials(**flask.session['credentials'])
 
   drive = googleapiclient.discovery.build(
       API_SERVICE_NAME, API_VERSION, credentials=credentials)

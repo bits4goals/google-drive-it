@@ -31,7 +31,7 @@ app.secret_key = 'REPLACE ME - this value is here as a placeholder.'
 
 
 @app.route('/', methods=['GET', 'POST'])
-def index():
+def home():
   if 'credentials' not in session:
     return redirect('authorize')
 
@@ -117,7 +117,7 @@ def oauth2callback():
   credentials = flow.credentials
   session['credentials'] = credentials_to_dict(credentials)
 
-  return redirect(url_for('index'))
+  return redirect(url_for('home'))
 
 
 @app.route('/revoke')
@@ -160,7 +160,7 @@ def upload(url):
 def signout():
   clear_credentials()
 
-  return redirect(url_for('index'))
+  return redirect(url_for('home'))
 
 def clear_credentials():
   if 'credentials' in session:

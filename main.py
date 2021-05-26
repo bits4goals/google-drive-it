@@ -35,7 +35,7 @@ def home():
   url, local_filename, remote_basename, error  = None, None, None, None
   if request.method == 'POST':
     if 'credentials' not in session:
-      return redirect('authorize')
+      return redirect(url_for('signin'))
 
     # Fetch the OAuth credentials that will be used to obtain upload access to
     # the Google Drive.

@@ -159,8 +159,6 @@ def upload(url):
 def clear_credentials():
   if 'credentials' in session:
     del session['credentials']
-  return ('Credentials have been cleared.<br><br>' +
-          print_index_table())
 
 
 def credentials_to_dict(credentials):

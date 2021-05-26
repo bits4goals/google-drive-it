@@ -2,12 +2,11 @@
 <title>{% block title %}{% endblock %}</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <nav>
-  <h1><a href="#"></a></h1>
   <ul>
     {% if 'credentials' not in session %}
-      <a href="{{ url_for('signin') }}" style="text-decoration:none">Sign in</a>
+      <a href="{{ url_for('signin') }}">Sign in</a>
     {% else %}
-      <a href="{{ url_for('signout') }}" style="text-decoration:none">Sign out</a>
+      <a href="{{ url_for('signout') }}">Sign out</a>
     {% endif %}
   </ul>
 </nav>

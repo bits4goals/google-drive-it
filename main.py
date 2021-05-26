@@ -156,7 +156,6 @@ def upload(url):
   return f'status_code: {status_code}<br>upload_url: {upload_url}'
 
 
-@app.route('/clear')
 def clear_credentials():
   if 'credentials' in session:
     del session['credentials']
@@ -186,8 +185,6 @@ def print_index_table():
           '<td>Revoke the access token associated with the current user ' +
           '    session. After revoking credentials, if you go to the test ' +
           '    page, you should see an <code>invalid_grant</code> error.' +
-          '</td></tr>' +
-          '<tr><td><a href="/clear">Clear Flask session credentials</a></td>' +
           '<td>Clear the access token currently stored in the user session. ' +
           '    After clearing the token, if you <a href="/test">test the ' +
           '    API request</a> again, you should go back to the auth flow.' +

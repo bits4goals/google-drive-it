@@ -50,7 +50,7 @@ def home():
       url = urlm.Url(session['_url'], credentials.token)
       local_filename, remote_basename = url.drive_it()
     except RuntimeError as e:
-      flash(str(e), 'error')
+      flash(str(e), 'notification')
     finally:
       session['_url'] = None
 

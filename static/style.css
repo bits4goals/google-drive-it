@@ -25,20 +25,46 @@ input[type=url] {
 .topbar {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: 1fr;
   background: #111;
 }
 
 .flash-messages {
-  z-index: 9999;
-  grid-row-start: 1;
-  grid-row-end: 3;
+  z-index: 0;
   justify-self: start;
   align-self: center;
-  background: #777;
   margin: 0.5em;
+  padding: 0 0 1em 0;
+}
+
+.flash-message {
+  z-index: 1;
+  list-style-type: none;
+  margin: 0.25em 0;
+  padding: 0.25em 0.5em;
+  border-radius: 0.5em;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.error {
+  background: rgba(255, 0, 0, 0.2);
+  border-color: rgba(255, 0, 0, 0.275);
+}
+
+.warning {
+  background: rgba(255, 255, 0, 0.2);
+  border-color: rgba(255, 255, 0, 0.275);
+}
+
+.notification {
+  background: rgba(0, 0, 255, 0.2);
+  border-color: rgba(0, 0, 255, 0.275);
 }
 
 .signinout {
+  z-index: 3;
+  grid-column-start: 2;
   justify-self: end;
   align-self: center;
   background: #777;
@@ -48,7 +74,6 @@ input[type=url] {
 .center {
   display: grid;
   place-items: center;
-  background: #ccc;
 }
 
 .bottombar {

@@ -6,6 +6,22 @@
 
 {% block content %}
 <div class="center">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <ul class="flash-messages">
+    {% for category, message in messages %}
+    <li class="flash-message {{ category }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
+
+  <ul class="flash-messages">
+    <li class="flash-message notification">Problems accessing URL: HTTP Error 403: Forbidden</li>
+    <li class="flash-message warning">Problems accessing URL: HTTP Error 403: Forbidden</li>
+    <li class="flash-message error">Problems accessing URL: HTTP Error 403: Forbidden</li>
+  </ul>
+
   <form method="post">
     <label for="url">Link</label>
     <div class="center">

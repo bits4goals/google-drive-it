@@ -2,42 +2,20 @@
 
 <div class="wrapper">
   <div class="topbar">
-    <div class="flash-messages">
-      <ul>
-        <li>Hello there!</li>
-        <li>Hello there!</li>
-        <li>Hello there!</li>
-        <li>Hello there!</li>
-        <li>Hello there!</li>
-        <li>Hello there!</li>
-      </ul>
-    </div>
-
-    <div class="signinout">
-      {% if 'credentials' not in session %}
-      <a href="{{ url_for('signin') }}">Sign in</a>
-      {% else %}
-      <a href="{{ url_for('signout') }}">Sign out</a>
-      {% endif %}
+    <div>
+      <div class="signinout">
+        {% if 'credentials' not in session %}
+        <a href="{{ url_for('signin') }}">Sign in</a>
+        {% else %}
+        <a href="{{ url_for('signout') }}">Sign out</a>
+        {% endif %}
+      </div>
     </div>
   </div>
 
-  <!-- <div class="flash-messages"> -->
-    <!--   {% with messages = get_flashed_messages(with_categories=true) %} -->
-    <!--   {% if messages %} -->
-    <!-- {% for category, message in messages %} -->
-    <!-- <ul> -->
-      <!--   <li>Hello there!</li> -->
-      <!-- </ul> -->
-
-
-    <!-- <li class="{{ category }}">{{ message }}</li> -->
-    <!-- {% endfor %} -->
-    <!--   {% endif %} -->
-    <!--   {% endwith %} -->
-    <!-- </div> -->
-
-  {% block content %}{% endblock %}
+  <div class="center">
+    {% block content %}{% endblock %}
+  </div>
 
   <div class="bottombar">
     <div class="appinfo">

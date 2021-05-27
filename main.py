@@ -51,6 +51,9 @@ def home():
       local_filename, remote_basename = url.drive_it()
     except RuntimeError as e:
       flash(str(e), 'notification')
+    else:
+      msg = 'Success! File "{}" is in your Drive now.'
+      flash(msg.format(remote_basename), 'notification')
     finally:
       session['_url'] = None
 

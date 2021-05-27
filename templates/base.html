@@ -1,29 +1,49 @@
 <!doctype html>
 <title>{% block title %}{% endblock %}</title>
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<nav>
-  <ul>
-    {% if 'credentials' not in session %}
-      <a href="{{ url_for('signin') }}">Sign in</a>
-    {% else %}
-      <a href="{{ url_for('signout') }}">Sign out</a>
-    {% endif %}
-  </ul>
-</nav>
-<section class="content">
-  <header>
-    {% block header %}{% endblock %}
-  </header>
 
-  <div class="outer">
-    <div class="middle">
-      <div class="inner">
+<div class="wrapper">
+  <div class="topbar">
+    <div class="signinout">
+      <div>
+        {% if 'credentials' not in session %}
+        <a href="{{ url_for('signin') }}">Sign in</a>
+        {% else %}
+        <a href="{{ url_for('signout') }}">Sign out</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <div class="center">
+    <section>
+      <header>
+        {% block header %}{% endblock %}
+      </header>
+
+    </section>
+
         {% block content %}{% endblock %}
 
         {% for message in get_flashed_messages() %}
           <div class="flash">{{ message }}</div>
         {% endfor %}
-      </div>
+    <!-- <div class="center"> -->
+    <!--   <div class="center"> -->
+    <!--     <p>logo</p> -->
+    <!--   </div> -->
+    <!--   <div class="center"> -->
+    <!--     <p>url</p> -->
+    <!--   </div> -->
+    <!--   <div class="center"> -->
+    <!--     <p>button</p> -->
+    <!--   </div> -->
+    <!-- </div> -->
+  </div>
+
+  <div class="bottombar">
+    <div class="appinfo">
+      footer
     </div>
   </div>
-</section>
+</div>

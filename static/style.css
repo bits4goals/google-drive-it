@@ -91,3 +91,36 @@ input[type=submit] {
   width: 400px;
   /*whatever width you want*/
 }
+
+.wrapper {
+  display: grid;
+  height: 100%;
+  grid-template-rows: 50px 1fr 50px;
+}
+
+.topbar {
+  display: grid;
+  place-items: center end;
+  background: #111;
+}
+
+.signinout {
+  background: #777;
+  margin: 0.5em;
+}
+
+.center {
+  display: grid;
+  place-items: center;
+  background: #ccc;
+}
+
+.bottombar {
+  display: grid;
+  place-items: center;
+  background: #111;
+}
+
+.appinfo {
+  background: #777;
+}

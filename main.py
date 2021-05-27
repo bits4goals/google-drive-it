@@ -206,6 +206,14 @@ def print_index_table():
 
 
 if __name__ == '__main__':
+  # Check for the presence of the essentials.
+  if not os.path.exists(CLIENT_SECRETS_FILE):
+    print('Error: Secrets file not found')
+    exit()
+  elif not 'SECRET_KEY' in os.environ:
+    print('Error: Secret Key not present')
+    exit()
+
   # ‘localhost’ is a regular (empty) file used as a flag: if it is
   # present, run locally.
   if os.path.exists('localhost'):

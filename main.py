@@ -57,11 +57,7 @@ def home():
     finally:
       session['_url'] = None
 
-  return render_template('index.html',
-                         url=url,
-                         local_filename=local_filename,
-                         remote_basename=remote_basename,
-                         error=error)
+  return render_template('index.html')
 
 
 @app.route('/signin')

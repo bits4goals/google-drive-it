@@ -2,34 +2,10 @@ html {
   font-family: sans-serif;
 }
 
-body {
-  max-width: 960px;
-  margin: auto;
-}
-
 a {
   color: #377ba8;
   text-decoration: none;
   font-size: smaller;
-}
-
-nav {
-  float: right;
-  padding: 0 1rem 0 0;
-}
-
-.content {
-  padding: 0 1rem 1rem;
-}
-
-.content > header {
-  display: flex;
-  align-items: flex-end;
-}
-
-.content > header h1 {
-  flex: auto;
-  margin: 1rem 0 0.25rem 0;
 }
 
 .flash {
@@ -42,54 +18,12 @@ nav {
   border-radius: 2px;  
 }
 
-.content form {
-  margin: 1em 0;
-  display: flex;
-  flex-direction: column;
-}
-
-.content label {
-  font-weight: bold;
-  margin-bottom: 0.5em;
-}
-
-.content input, .content textarea {
-  margin-bottom: 1em;
-}
-
-.content textarea {
-  min-height: 12em;
-  resize: vertical;
-}
-
-input.danger {
-  color: #cc2f2e;
-}
-
 input[type=submit] {
-  align-self: start;
-  min-width: 10em;
+  font-size: xxx-large;
 }
 
-.outer {
-  display: table;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-}
-
-.middle {
-  display: table-cell;
-  vertical-align: middle;
-}
-
-.inner {
-  margin-left: auto;
-  margin-right: auto;
-  width: 400px;
-  /*whatever width you want*/
+input[type=url] {
+  font-size: medium;
 }
 
 .wrapper {

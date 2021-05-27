@@ -1,23 +1,30 @@
 {% extends 'base.html' %}
 
 {% block header %}
-  <h1>{% block title %}{% endblock %}</h1>
+<h1>{% block title %}{% endblock %}</h1>
 {% endblock %}
 
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for category, message in messages %}
-      <li class="{{ category }}">{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-
 {% block content %}
+<div class="center">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+  <ul class=flashes>
+    {% for category, message in messages %}
+    <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
+
   <form method="post">
     <label for="url">Link</label>
-    <input type="url" name="url">
-    <input type="submit" value="Driveet">
+    <div class="center">
+      <input type="url" name="url">
+    </div>
+
+    <div class="center">
+      <input type="submit" value="Driveet">
+    </div>
   </form>
+</div>
 {% endblock %}

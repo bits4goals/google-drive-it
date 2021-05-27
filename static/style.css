@@ -14,6 +14,12 @@ input[type=submit] {
 
 input[type=url] {
   font-size: medium;
+  min-width: 420px;
+  border-style: solid;
+  border-color: rgb(0, 0, 0, 0.1);
+  border-width: 1px;
+  border-radius: 1em;
+  padding: 0.5em 0.75em;
 }
 
 .wrapper {
@@ -24,9 +30,12 @@ input[type=url] {
 
 .topbar {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: 1fr;
-  background: #111;
+}
+
+.signinout {
+  justify-self: end;
+  align-self: center;
+  margin: 0.5em;
 }
 
 .flash-messages {
@@ -60,15 +69,6 @@ input[type=url] {
 .notification {
   background: rgba(0, 0, 255, 0.2);
   border-color: rgba(0, 0, 255, 0.275);
-}
-
-.signinout {
-  z-index: 3;
-  grid-column-start: 2;
-  justify-self: end;
-  align-self: center;
-  background: #777;
-  margin: 0.5em;
 }
 
 .center {

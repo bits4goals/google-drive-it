@@ -6,16 +6,6 @@
 
 {% block content %}
 <div class="center">
-  {% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-  <ul class=flashes>
-    {% for category, message in messages %}
-    <li class="{{ category }}">{{ message }}</li>
-    {% endfor %}
-  </ul>
-  {% endif %}
-  {% endwith %}
-
   <form method="post">
     <label for="url">Link</label>
     <div class="center">

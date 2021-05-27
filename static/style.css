@@ -8,16 +8,6 @@ a {
   font-size: smaller;
 }
 
-.flash {
-  font-size: smaller;
-  padding: 0.5em 0.75em;
-  background: #cae6f6;
-  display: table;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 2px;  
-}
-
 input[type=submit] {
   font-size: xxx-large;
 }
@@ -34,11 +24,23 @@ input[type=url] {
 
 .topbar {
   display: grid;
-  place-items: center end;
+  grid-template-columns: repeat(2, 1fr);
   background: #111;
 }
 
+.flash-messages {
+  z-index: 9999;
+  grid-row-start: 1;
+  grid-row-end: 3;
+  justify-self: start;
+  align-self: center;
+  background: #777;
+  margin: 0.5em;
+}
+
 .signinout {
+  justify-self: end;
+  align-self: center;
   background: #777;
   margin: 0.5em;
 }

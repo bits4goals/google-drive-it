@@ -2,6 +2,17 @@
 
 <div class="wrapper">
   <div class="topbar">
+    <div class="flash-messages">
+      <ul>
+        <li>Hello there!</li>
+        <li>Hello there!</li>
+        <li>Hello there!</li>
+        <li>Hello there!</li>
+        <li>Hello there!</li>
+        <li>Hello there!</li>
+      </ul>
+    </div>
+
     <div class="signinout">
       {% if 'credentials' not in session %}
       <a href="{{ url_for('signin') }}">Sign in</a>
@@ -11,17 +22,20 @@
     </div>
   </div>
 
-  <div class="flash-messages">
-    {% with messages = get_flashed_messages(with_categories=true) %}
-    {% if messages %}
-    <ul class=flashes>
-      {% for category, message in messages %}
-      <li class="{{ category }}">{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
-  </div>
+  <!-- <div class="flash-messages"> -->
+    <!--   {% with messages = get_flashed_messages(with_categories=true) %} -->
+    <!--   {% if messages %} -->
+    <!-- {% for category, message in messages %} -->
+    <!-- <ul> -->
+      <!--   <li>Hello there!</li> -->
+      <!-- </ul> -->
+
+
+    <!-- <li class="{{ category }}">{{ message }}</li> -->
+    <!-- {% endfor %} -->
+    <!--   {% endif %} -->
+    <!--   {% endwith %} -->
+    <!-- </div> -->
 
   {% block content %}{% endblock %}
 

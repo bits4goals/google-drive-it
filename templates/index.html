@@ -17,9 +17,14 @@
   {% endwith %}
 
   <form method="post">
-    <label for="url">Save a file to your Google Drive directly from the link.</label>
+    <p class="center">Save to Google Drive directly from the link!</p>
+
     <div class="center">
-      <input type="url" onfocus="this.value=''" value="Paste the link here" name="url">
+      <input type="url"
+             onfocus="this.value=''"
+             onfocusout="this.value='Paste the link here...'"
+             value="Paste the link here..."
+             name="url">
     </div>
 
     <div class="center">

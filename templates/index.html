@@ -21,10 +21,27 @@
 
     <div class="center">
       <input type="url"
-             onfocus="this.value=''"
              value="Paste the link here..."
-             name="url">
+             name="url"
+             id="url">
     </div>
+
+    <script>
+      document.getElementById('url').onclick = function() {
+          if (document.getElementById('url').value == 'Paste the link here...') {
+              document.getElementById('url').value = '';
+          }
+          else {
+              document.getElementById('url').select();
+          }
+      }
+
+      document.getElementById('url').onblur = function() {
+          if (document.getElementById('url').value.trim() == '') {
+              document.getElementById('url').value = 'Paste the link here...';
+          }
+      }
+    </script>
 
     <div class="center">
       <input type="submit" value="Driveet">

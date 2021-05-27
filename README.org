@@ -1,6 +1,6 @@
 Driveet---Save to Google Drive directly from the link!
 
-You can check it out [[https://driveet.appspot.com][here]].
+It was deployed as an App Engine on the Google Cloud. [[https://driveet.appspot.com][Check it out!]]
 
 #+HTML: <p xmlns:dct="http://purl.org/dc/terms/">
 #+HTML:   <a rel="license"

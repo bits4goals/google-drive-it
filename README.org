@@ -1,4 +1,4 @@
-Driveet---Save to Google Drive directly from the link!
+Driveet---save to Google Drive directly from the link!
 
 It was deployed as an App Engine on the Google Cloud. [[https://driveet.appspot.com][Check it out!]]
 

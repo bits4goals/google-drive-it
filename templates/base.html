@@ -3,13 +3,11 @@
 <div class="wrapper">
   <div class="topbar">
     <div class="signinout">
-      <div>
-        {% if 'credentials' not in session %}
-        <a href="{{ url_for('signin') }}">Sign in</a>
-        {% else %}
-        <a href="{{ url_for('signout') }}">Sign out</a>
-        {% endif %}
-      </div>
+      {% if 'credentials' not in session %}
+      <a href="{{ url_for('signin') }}">Sign in</a>
+      {% else %}
+      <a href="{{ url_for('signout') }}">Sign out</a>
+      {% endif %}
     </div>
   </div>
 

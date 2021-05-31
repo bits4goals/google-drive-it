@@ -27,8 +27,8 @@ if not credentials or not credentials.valid:
             CLIENT_SECRETS_FILE, SCOPES)
         credentials = flow.run_local_server(port=0)
     # Save the credentials for the next run
-    with open(CREDENTIALS_FILE, 'w') as credentials:
-        credentials.write(credentials.to_json())
+    with open(CREDENTIALS_FILE, 'w') as f:
+        f.write(credentials.to_json())
 
 url = urlm.Url('file:///home/rafa/re/eu/profile-picture/avatar.jpg',
                credentials.token)

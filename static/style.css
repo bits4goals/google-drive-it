@@ -86,12 +86,23 @@ input[type=url] {
 
 .bottombar {
   display: grid;
+  grid-template-columns: repeat(3, 1fr);
   place-items: center;
   background: #111;
-}
-
-.appinfo {
   text-align: center;
   font-size: smaller;
   color: #777;
+}
+
+.appinfo {
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.contact {
+  align-self: center;
+  justify-self: end;
+  grid-column-start: 3;
+  grid-column-end: 4;
+  padding: 1em;
 }

@@ -210,7 +210,8 @@ class Url:
         if getattr(request, 'status_code') == 200:
             upload_url = request.headers['Location']
         else:
-            raise RuntimeError('Problems obtaining upload URL from API')
+            raise RuntimeError('Problems obtaining upload URL from API '\
+                               + str(request))
 
         return upload_url
 

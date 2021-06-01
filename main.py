@@ -37,8 +37,7 @@ def home():
   if request.method == 'POST':
     session['_url'] = request.form['url']
 
-    if 'credentials' not in session:
-      return redirect(url_for('signin'))
+    return redirect(url_for('signin'))
 
   if session.get('_url'):
     # Fetch the OAuth credentials that will be used to obtain upload access to
